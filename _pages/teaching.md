@@ -5,8 +5,11 @@ permalink: /teaching/
 author_profile: true
 ---
 
-<div><span style="font-style:normal">
-<li>CptS 322 Software Engineering Principles I: Fall 2016, Spring 2017, Spring 2018, Spring 2019, Spring 2020, Spring 2021, <a href="http://eecs.wsu.edu/~hcai/cpts322/">Spring 2022</a></li>
+<div>
+  <span style="font-style:normal">
+    <li>CptS 322 Software Engineering Principles I</li> 
+    <li>Fall 2016, 
+    Spring 2017, Spring 2018, Spring 2019, Spring 2020, Spring 2021, <a href="http://eecs.wsu.edu/~hcai/cpts322/">Spring 2022</a></li>
 </span></div>
 <div><span style="font-style:normal">
 <li>CptS 422 Software Engineering Principles II: Fall 2018, Fall 2019, Fall 2020, <a href="http://eecs.wsu.edu/~hcai/cpts422/">Fall 2021</a></li>
