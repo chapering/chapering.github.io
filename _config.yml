@@ -10,11 +10,11 @@ locale                   : "en-US"
 title                    : #"Haipeng Cai's Personal Website"
 title_separator          : "-"
 name                     : &name "Haipeng Cai"
-description              : &description "Assistant Professor of Computer Science"
+description              : &description "Assistant Professor"
 url                      : https://chapering.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "chapering/chapering.github.io"
-teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
+teaser                   : "wsu.svg" # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
 future                   : true
@@ -82,12 +82,12 @@ analytics:
 author:
   name             : "Haipeng Cai"
   avatar           : "profile.png"
-  bio              : "Assistant Professor of Computer Science"
-  location         : "Pullman, WA"
+  bio              : "Assistant Professor"
+  location         : "Pullman, WA (EME B47)"
   employer         : #"Washington State University"
   pubmed           : # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=Ru4B_wkAAAAJ&hl=en&inst=3189495329521712930"
-  email            : 
+  email            : "haipeng.cai at wsu dot edu"
   researchgate     : "https://www.researchgate.net/profile/Haipeng-Cai"
   uri              :
   bitbucket        : #"https://bitbucket.org/haipeng_cai/"
