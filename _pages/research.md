@@ -2,18 +2,18 @@
 permalink: /research/
 #title: "Research"
 author_profile: true
-redirect_from: 
-  - /research/
-  - /research.html
+#redirect_from: 
+#  - /research/
+#  - /research.html
 ---
 
-## Research overview 
+## Overview 
 
 Research in the group currently focuses on the <em>security and other quality aspects of mobile apps, distributed systems, and multi-language software</em>, primarily through developing and applying scalable and cost-effective program analysis techniques in synergy with data-driven (especially deep learning) approaches. 
 
 ---
 
-## Current research projects
+## Current projects
 
 * vulnerability discovery from indutry-scale distributed software systems via scalable program analysis techniques.
 
@@ -24,6 +24,8 @@ Research in the group currently focuses on the <em>security and other quality as
 * program analysis and run-time support for testing and validation of multi-language software systems, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) languages.
 
 ## Funding acknowledgement
+
+Our research has been enabled by grants offered by several funding agencies. We gratefully acknowledge their great support!
 
 * 
 
