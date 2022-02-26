@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Haipeng Cai's Personal Website"
+title                    : #"Haipeng Cai's Personal Website"
 title_separator          : "-"
 name                     : &name "Haipeng Cai"
 description              : &description "Assistant Professor of Computer Science"
@@ -82,9 +82,9 @@ analytics:
 author:
   name             : "Haipeng Cai"
   avatar           : "profile.png"
-  bio              : "Assistant Professor of Computer Science working on software engineering, software security, program analysis"
+  bio              : "Assistant Professor of Computer Science"
   location         : "Pullman, WA"
-  employer         : "EECS at Washington State University"
+  employer         : #"Washington State University"
   pubmed           : # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=Ru4B_wkAAAAJ&hl=en&inst=3189495329521712930"
   email            : 
