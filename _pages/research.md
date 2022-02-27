@@ -27,5 +27,18 @@ Research in the group currently focuses on the <em>security and other quality as
 
 Our research has been enabled by grants offered by several funding agencies. We gratefully acknowledge their great support!
 
-* 
+
+<table border="0">
+<tr>
+<td><a href="https://www.nsf.gov/" title="National Science Foundation"><img src="../images/nsf.png" class="thumbnail" alt="National Science Foundation"></td></a>
+<td><a href="https://www.arl.army.mil/who-we-are/aro/" title="Army Research Office"><img src="../images/aro.png" class="thumbnail" alt="Army Research Office"></td></a>
+<td><a href="https://www.onr.navy.mil/" title="Office of Naval Research"><img src="../images/onr.png" class="thumbnail" alt="Office of Naval Research"></td></a>
+<td><a href="https://www.energy.gov/science/ascr/advanced-scientific-computing-research" title="Department of Energy"><img src="../images/doe.png" class="thumbnail" alt="Department of Energy"></td></a>
+<td><a href="https://www.pnnl.gov/" title="Pacific Northwest National Laboratory"><img src="../images/doepnnl.png" class="thumbnail" alt="Pacific Northwest National Laboratory"></td>
+<td><a href="https://www.darpa.mil/" title="Defense Advanced Research Projects Agency"><img src="../images/darpa.png" class="thumbnail" alt="Defense Advanced Research Projects Agency"></td></a>
+<!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/orso.png" class="thumbnail" alt="WSU Office of Research"></td></a>-->
+<!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/wsuresearch.jpg" class="thumbnail" alt="WSU Office of Research"></td></a>-->
+<td><a href="https://www.wsu.edu/" title="Washington State University"><img src="../images/wsu-logo.png" class="thumbnail" alt="Washington State University"></td></a>
+</tr>
+</table>
 
