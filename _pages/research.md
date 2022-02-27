@@ -7,6 +7,39 @@ author_profile: true
 #  - /research.html
 ---
 
+<style>
+img {
+  max-width: 100%;
+}
+img.thumbnail {
+  width: 60px;
+  height: 60px;
+}
+.output {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+p,
+dt {
+    font-weight: bold;
+}
+
+dl,
+dd {
+    font-size: .9rem;
+}
+
+dd {
+    margin-bottom: 1em;
+}
+
+table, th, td {
+  border: 0px solid white;
+}
+
+</style>
+</head>
+
 ## Overview 
 
 Research in the group currently focuses on the <em>security and other quality aspects of mobile apps, distributed systems, and multi-language software</em>, primarily through developing and applying scalable and cost-effective program analysis techniques in synergy with data-driven (especially deep learning) approaches. 

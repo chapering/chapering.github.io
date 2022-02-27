@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : #"Haipeng Cai's Personal Website"
+title                    : "                   " #"Haipeng Cai's Personal Website"
 title_separator          : "-"
 name                     : &name "Haipeng Cai"
 description              : &description "Assistant Professor"
