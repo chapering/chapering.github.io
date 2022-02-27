@@ -6,7 +6,7 @@ author_profile: true
 #  - /research/
 #  - /research.html
 ---
-
+<title>Research - Haipeng Cai</title>
 <style>
 img {
   max-width: 100%;
