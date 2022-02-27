@@ -102,7 +102,7 @@ author:
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : "https://www.linkedin.com/in/haipeng-cai-91949b25/"
+  linkedin         : "haipeng-cai-91949b25/"
   orcid            : "https://orcid.org/0000-0002-5224-9970"
   pinterest        :
   soundcloud       :
@@ -113,10 +113,9 @@ author:
   vine             :
   weibo            :
   xing             :
-  youtube          : #"https://www.youtube.com/channel/UCRgT4m5XseKoBGP6uvQB6eQ"
+  youtube          :
   wikipedia        :
-  personal blog    : "http://surfingtroves.blogspot.com/"
-  SourceForge repo : "http://haipengcai.users.sourceforge.net/"
+
 
 
 # Reading Files
