@@ -19,26 +19,10 @@ img.thumbnail {
     font: 1rem 'Fira Sans', sans-serif;
 }
 
-p,
-dt {
-    font-weight: bold;
-}
-
-dl,
-dd {
-    font-size: .9rem;
-}
-
-dd {
-    margin-bottom: 1em;
-}
-
 table, th, td {
   border: 0px solid white;
 }
-
 </style>
-</head>
 
 ## Overview 
 
@@ -71,3 +55,39 @@ Our research has been enabled by grants offered by several funding agencies. We 
 <!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/wsuresearch.jpg" class="thumbnail" alt="WSU Office of Research"></td></a>-->
 <a href="https://www.wsu.edu/" title="Washington State University"><img src="../images/wsu-logo.png" class="thumbnail" alt="Washington State University"></a>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var sc_project=10604826; 
+var sc_invisible=1; 
+var sc_security="10996eea"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/free-web-stats/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/10604826/0/10996eea/1/"
+alt="website statistics"></a></div></noscript>
