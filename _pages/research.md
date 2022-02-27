@@ -32,15 +32,15 @@ Research in the group currently focuses on the <em>security and other quality as
 
 ## Current Projects
 
-* Scalable and cost-effective program analysis techniques for indutry-scale distributed software systems and their applications to the maintenance, evolution, and security analysis of those systems
+* Scalable and cost-effective program analysis techniques for indutry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
 
-* Data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive generation of realistic data samples to support training of powerful, generalizable DL code models and scientific assessments of existing analysis techniques)
+* Data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable DL code models and scientific assessments of existing analysis techniques)
 
-* Autonomic information security defense in adversarial and dynamic environments mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
+* Autonomic information **security defense in adversarial and dynamic environments** mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
 
-* Program analysis and run-time support for testing and validation of multi-language software systems, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries
+* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'21)
 
-* Mobile software engineering with a focus on Android app and system security including effective and sustainable malware detection using data-driven approaches
+* Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using data-driven approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
 
 ## Funding Acknowledgements
 
@@ -56,27 +56,6 @@ Our research has been enabled by grants offered by several funding agencies. We 
 <!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/orso.png" class="thumbnail" alt="WSU Office of Research"></td></a>-->
 <!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/wsuresearch.jpg" class="thumbnail" alt="WSU Office of Research"></td></a>-->
 <a href="https://www.wsu.edu/" title="Washington State University"><img src="../images/wsu-logo.png" class="thumbnail" alt="Washington State University"></a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script type="text/javascript">
 var sc_project=10604826; 

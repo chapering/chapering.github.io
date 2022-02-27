@@ -28,23 +28,6 @@ author_profile: true
 * Fall 2018
 * Fall 2017
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript">
 var sc_project=10604826; 
 var sc_invisible=1; 
