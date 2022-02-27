@@ -5,6 +5,7 @@ permalink: /pubs/
 author_profile: true
 ---
 
+<title>Publications - Haipeng Cai</title>
 <script src="https://bibbase.org/show?bib=chapering.github.io/pubs/hcaipub.bib&jsonp=1&nocache=1&fullnames=1&commas=true&theme=dividers"></script>
 
 {% if author.googlescholar %}
