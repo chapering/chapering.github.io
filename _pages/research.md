@@ -38,7 +38,7 @@ Research in the group currently focuses on the <em>security and other quality as
 
 * Autonomic information **security defense in adversarial and dynamic environments** mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
 
-* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'21)
+* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22)
 
 * Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using data-driven approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
 
