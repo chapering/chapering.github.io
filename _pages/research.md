@@ -1,6 +1,6 @@
 ---
 permalink: /research/
-#title: "Research"
+title: "Research"
 author_profile: true
 #redirect_from: 
 #  - /research/
@@ -30,17 +30,19 @@ Research in the group currently focuses on the <em>security and other quality as
 
 ---
 
-## Current projects
+## Current Projects
 
-* vulnerability discovery from indutry-scale distributed software systems via scalable program analysis techniques.
+* Scalable and cost-effective program analysis techniques for indutry-scale distributed software systems and their applications to the maintenance, evolution, and security analysis of those systems
 
-* data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive generation of realistic data samples to support training of powerful, generalizable DL code models)
+* Data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive generation of realistic data samples to support training of powerful, generalizable DL code models and scientific assessments of existing analysis techniques)
 
-* autonomic information security defense in adversarial and dynamic environments mainly through efficient system profiling and (deep) reinforcement learning, and
+* Autonomic information security defense in adversarial and dynamic environments mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
 
-* program analysis and run-time support for testing and validation of multi-language software systems, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) languages.
+* Program analysis and run-time support for testing and validation of multi-language software systems, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries
 
-## Funding acknowledgement
+* Mobile software engineering with a focus on Android app and system security including effective and sustainable malware detection using data-driven approaches
+
+## Funding Acknowledgements
 
 Our research has been enabled by grants offered by several funding agencies. We gratefully acknowledge their great support!
 
