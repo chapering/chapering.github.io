@@ -26,26 +26,25 @@ table, th, td {
 
 ## Overview 
 
-Research in the group currently focuses on the <em>security and other quality aspects of mobile apps, distributed systems, and multi-language software</em>, primarily through developing and applying scalable and cost-effective program analysis techniques in synergy with data-driven (especially deep learning) approaches. 
+Research in the group currently focuses on the <em>security and other quality aspects of mobile apps, distributed systems, and multi-language software</em>, primarily through developing and applying scalable and cost-effective program analysis techniques in synergy with data-driven (especially machine/deep learning) approaches. We sometimes also conduct empirical studies to understand the problem space better before setting out to develop technical solutions.
 
 ---
 
 ## Current Projects
 
-* Scalable and cost-effective program analysis techniques for indutry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
+* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
 
-* Data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable DL code models and scientific assessments of existing analysis techniques)
+* Data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques)
 
 * Autonomic information **security defense in adversarial and dynamic environments** mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
 
 * Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22)
 
-* Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using data-driven approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
+* Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
 
 ## Funding Acknowledgements
 
 Our research has been enabled by grants offered by several funding agencies. We gratefully acknowledge their great support!
-
 
 <a href="https://www.nsf.gov/" title="National Science Foundation"><img src="../images/nsf.png" class="thumbnail" alt="National Science Foundation"></a>
 <a href="https://www.arl.army.mil/who-we-are/aro/" title="Army Research Office"><img src="../images/aro.png" class="thumbnail" alt="Army Research Office"></a>
