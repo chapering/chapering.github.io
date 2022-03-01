@@ -28,8 +28,6 @@ table, th, td {
 
 Research in the group currently focuses on the <em>security and other quality aspects of mobile apps, distributed systems, and multi-language software</em>, primarily through developing and applying scalable and cost-effective program analysis techniques in synergy with data-driven (especially machine/deep learning) approaches. We sometimes also conduct empirical studies to understand the problem space better before setting out to develop technical solutions.
 
----
-
 ## Current Projects
 
 * Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
