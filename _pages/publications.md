@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 <title>Publications - Haipeng Cai</title>
-<script src="https://bibbase.org/show?bib=chapering.github.io/pubs/hcaipub.bib&jsonp=1&nocache=1&fullnames=1&commas=true&theme=dividers"></script>
+<script src="https://bibbase.org/show?bib=chapering.github.io/pubs/hcaipub.bib&jsonp=1&nocache=0&fullnames=1&commas=true&theme=dividers"></script>
 
 {% if author.googlescholar %}
   You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
