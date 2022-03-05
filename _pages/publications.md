@@ -4,9 +4,29 @@ title: "Publications"
 permalink: /pubs/
 author_profile: true
 ---
+<style type="text/css" rel="stylesheet">
+    #bibbase_header a[onclick="groupby('downloads')"] { display: none; }
+
+    #group_article div.bibbase_group i+span { display: none; }
+          #group_inproceedings div.bibbase_group i+span { display: none; }
+          #group_mastersthesis div.bibbase_group i+span { display: none; }
+          #group_phdthesis div.bibbase_group i+span { display: none; }
+          #group_techreport div.bibbase_group i+span { display: none; }
+          #group_unpublished div.bibbase_group i+span { display: none; }
+          #group_incollection div.bibbase_group i+span { display: none; }
+
+          #group_article div.bibbase_group i:after { content: " Journal Articles" }
+          #group_inproceedings div.bibbase_group i:after { content: " Conference Papers" }
+          #group_mastersthesis div.bibbase_group i:after { content: " Master's Thesis" }
+          #group_phdthesis div.bibbase_group i:after { content: " PhD Thesis" }
+          #group_techreport div.bibbase_group i:after { content: " Technical Report" }
+          #group_unpublished div.bibbase_group i:after { content: " Unpublished" }
+          #group_incollection div.bibbase_group i:after { content: " In Collection" }
+</style>
+<!-- >.groupby_dropdown { display: none; } -->
 
 <title>Publications - Haipeng Cai</title>
-<script src="https://bibbase.org/show?bib=chapering.github.io/pubs/hcaipub.bib&jsonp=1&nocache=0&fullnames=1&commas=true&theme=dividers"></script>
+<script src="https://bibbase.org/show?bib=chapering.github.io/pubs/hcaipub.bib&jsonp=1&nocache=1&fullnames=1&commas=true&theme=dividers"></script>
 
 {% if author.googlescholar %}
   You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
