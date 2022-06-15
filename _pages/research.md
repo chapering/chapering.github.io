@@ -32,11 +32,11 @@ Research in the group currently focuses on the <em>security and other quality as
 
 * Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
 
-* Data quality problems in learning deep code models for software vulnerability analysis (e.g., leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques)
+* Data quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22)
 
 * Autonomic information **security defense in adversarial and dynamic environments** mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
 
-* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22)
+* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22)
 
 * Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
 
@@ -47,6 +47,7 @@ Our research has been enabled by grants offered by several funding agencies. We 
 <a href="https://www.nsf.gov/" title="National Science Foundation"><img src="../images/nsf.png" class="thumbnail" alt="National Science Foundation"></a>
 <a href="https://www.arl.army.mil/who-we-are/aro/" title="Army Research Office"><img src="../images/aro.png" class="thumbnail" alt="Army Research Office"></a>
 <a href="https://www.onr.navy.mil/" title="Office of Naval Research"><img src="../images/onr.png" class="thumbnail" alt="Office of Naval Research"></a>
+<a href="https://www.opentech.fund/" title="Open Technology Fund"><img src="../images/otf.png" class="thumbnail" alt="Open Technology Fund"></a>
 <a href="https://www.energy.gov/science/ascr/advanced-scientific-computing-research" title="Department of Energy"><img src="../images/doe.png" class="thumbnail" alt="Department of Energy"></a>
 <a href="https://www.pnnl.gov/" title="Pacific Northwest National Laboratory"><img src="../images/doepnnl.png" class="thumbnail" alt="Pacific Northwest National Laboratory"></a>
 <a href="https://www.darpa.mil/" title="Defense Advanced Research Projects Agency"><img src="../images/darpa.png" class="thumbnail" alt="Defense Advanced Research Projects Agency"></a>
