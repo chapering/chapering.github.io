@@ -15,7 +15,8 @@ author_profile: true
 * Fall 2016
 
 ### CptS 422 Software Engineering Principles II
-* [Fall 2021](http://eecs.wsu.edu/~hcai/cpts422/)
+* [Fall 2022](http://eecs.wsu.edu/~hcai/cpts422/)
+* Fall 2021
 * Fall 2020 
 * Fall 2019 
 * Fall 2018 
@@ -27,6 +28,9 @@ author_profile: true
 * Fall 2019
 * Fall 2018
 * Fall 2017
+
+### CptS 428/528 Advanced Cyber Security
+* [Fall 2022](http://eecs.wsu.edu/~hcai/cpts4528/)
 
 <script type="text/javascript">
 var sc_project=10604826; 
