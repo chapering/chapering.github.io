@@ -6,7 +6,8 @@ author_profile: true
 ---
 
 ### CptS 322 Software Engineering Principles I
-* [Spring 2022](http://eecs.wsu.edu/~hcai/cpts322/)
+* [Spring 2023](http://eecs.wsu.edu/~hcai/cpts322/)
+* Spring 2022
 * Spring 2021
 * Spring 2020
 * Spring 2019
