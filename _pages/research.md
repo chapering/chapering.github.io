@@ -30,13 +30,11 @@ Research in the group currently focuses on the <em>security and other quality as
 
 ## Current Projects
 
-* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
+* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
 
 * Data quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23)
 
-* Autonomic information **security defense in adversarial and dynamic environments** mainly through efficient system profiling, fuzzing, and (deep) reinforcement learning
-
-* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22, USENIX Security'23, ICSE'23)
+* Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22, USENIX Security'23, ICSE'23, CCS'23)
 
 * Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
 
