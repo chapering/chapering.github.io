@@ -32,7 +32,7 @@ author_profile: true
 
 ### CptS 428/528 Software Security and Reverse Engineering
 * [Fall 2023](http://eecs.wsu.edu/~hcai/cpts4528/)
-* [Fall 2022]
+* Fall 2022
 
 <script type="text/javascript">
 var sc_project=10604826; 
