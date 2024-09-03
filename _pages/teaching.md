@@ -5,8 +5,11 @@ permalink: /teaching/
 author_profile: true
 ---
 
+### CSE 410/518 Software Security
+* [Fall 2024](https://chapering.github.io/teaching/cse410518)
+
 ### CptS 322 Software Engineering Principles I
-* [Spring 2024](http://eecs.wsu.edu/~hcai/cpts322/)
+* [Spring 2024](https://chapering.github.io/teaching/cpts322)
 * Spring 2023
 * Spring 2022
 * Spring 2021
@@ -17,14 +20,14 @@ author_profile: true
 * Fall 2016
 
 ### CptS 422 Software Engineering Principles II
-* [Fall 2022](http://eecs.wsu.edu/~hcai/cpts422/)
+* [Fall 2022](https://chapering.github.io/teaching/cpts422)
 * Fall 2021
 * Fall 2020 
 * Fall 2019 
 * Fall 2018 
 
 ### CptS 583 Software Quality
-* [Spring 2022](http://eecs.wsu.edu/~hcai/cpts583/)
+* [Spring 2022](https://chapering.github.io/teaching/cpts583)
 * Spring 2021
 * Spring 2020
 * Fall 2019
@@ -32,7 +35,7 @@ author_profile: true
 * Fall 2017
 
 ### CptS 428/528 Software Security and Reverse Engineering
-* [Fall 2023](http://eecs.wsu.edu/~hcai/cpts4528/)
+* [Fall 2023](https://chapering.github.io/teaching/cpts4528)
 * Fall 2022
 
 <script type="text/javascript">
