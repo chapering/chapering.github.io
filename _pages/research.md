@@ -30,7 +30,7 @@ Research in the group currently focuses on the <em>security and other quality as
 
 ## Current Projects
 
-* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21)
+* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21, TOSEM'24)
 
 * Data quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
 
