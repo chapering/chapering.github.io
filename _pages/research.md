@@ -34,11 +34,11 @@ Research in the group currently focuses on the <em>security and other quality as
 
 * Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22, USENIX Security'23, ICSE'23, CCS'23, TOSEM'23, TSE'24, FSE'24, FSE'25)
 
-* Mobile security/privacy with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20, TOSEM'25, Oakland/S&P'25)
+* Analysis and security/privacy of **mobile apps and systems** including longitudinal characterizations, effective and sustainable malware analysis using learning-based approaches, and scalable testing of mobible software frameworks/platforms (TIFS'19, ISSTA'19, TSE'20, TOSEM'20, TOSEM'25, Oakland/S&P'25)
 
-* Data quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
+* Data availability/quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive generation of realistic data samples to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
 
-* Broadly leveraging latest AI/ML advances (e.g., machine/deep learning, LLMs, AI agents) for software and systems security (USENIX Security'25)
+* Broadly leveraging latest advances (e.g., LLMs, AI agents) in AI/ML for software/systems security and security of AI/ML software/systems (USENIX Security'25)
 
 ## Funding Acknowledgements
 
@@ -54,6 +54,7 @@ Our research has been enabled by grants offered by several funding agencies. We 
 <!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/orso.png" class="thumbnail" alt="WSU Office of Research"></td></a>-->
 <!--<td><a href="https://research.wsu.edu/" title="WSU Office of Research"><img src="../images/wsuresearch.jpg" class="thumbnail" alt="WSU Office of Research"></td></a>-->
 <a href="https://www.wsu.edu/" title="Washington State University"><img src="../images/wsu-logo.png" class="thumbnail" alt="Washington State University"></a>
+<a href="https://www.buffalo.edu/" title="University at Buffalo, SUNY"><img src="../images/ub-logo.png" class="thumbnail" alt="University at Buffalo, SUNY"></a>
 
 <script type="text/javascript">
 var sc_project=10604826; 
