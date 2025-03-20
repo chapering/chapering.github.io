@@ -36,7 +36,7 @@ Research in the group currently focuses on the <em>security and other quality as
 
 * Mobile security/privacy with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20, TOSEM'25, Oakland/S&P'25)
 
-* Data quality problems in learning deep code models and LLMs for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
+* Data quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
 
 * Broadly leveraging latest AI/ML advances (e.g., machine/deep learning, LLMs, AI agents) for software and systems security (USENIX Security'25)
 
