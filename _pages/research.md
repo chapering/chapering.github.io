@@ -32,11 +32,11 @@ Research in the group currently focuses on the <em>security and other quality as
 
 * Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21, TOSEM'24)
 
-* Data quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
-
 * Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22, USENIX Security'23, ICSE'23, CCS'23, TOSEM'23, TSE'24, FSE'24, FSE'25)
 
-* Mobile software engineering with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20)
+* Mobile security/privacy with a focus on **Android app and system security** including longitudinal characterizations as well as effective and sustainable malware analysis using learning-based approaches (TIFS'19, ISSTA'19, TSE'20, TOSEM'20, TOSEM'25, Oakland/SP'25)
+
+* Data quality problems in learning deep code models and LLMs for software vulnerability analysis, e.g. leveraging generative models for automated, massive **generation of realistic data samples** to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
 
 * Broadly leveraging latest AI/ML advances (e.g., machine/deep learning, LLMs, AI agents) for software and systems security (USENIX Security'25)
 
