@@ -30,11 +30,11 @@ Research in the group currently focuses on the <em>security and other quality as
 
 ## Current Projects
 
-* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21, TOSEM'24)
+* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21, TOSEM'24, CSUR'25)
 
 * Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22, USENIX Security'23, ICSE'23, CCS'23, TOSEM'23, TSE'24, FSE'24, FSE'25)
 
-* Analysis and security/privacy of **mobile apps and systems** including longitudinal characterizations, effective and sustainable malware analysis using learning-based approaches, and scalable testing of mobible software frameworks/platforms (TIFS'19, ISSTA'19, TSE'20, TOSEM'20, TOSEM'25, Oakland/S&P'25, ISSTA'25)
+* Analysis and security/privacy of **mobile apps and systems** including longitudinal characterizations, effective and sustainable malware analysis using learning-based approaches, and scalable testing of mobible software frameworks/platforms (TIFS'19, ISSTA'19, TSE'20, TOSEM'20, TOSEM'25-a, TOSEM'25-b, Oakland/S&P'25, ISSTA'25)
 
 * Data availability/quality problems in learning deep code models for software vulnerability analysis, e.g. leveraging generative models for automated, massive generation of realistic data samples to support training of powerful, generalizable deep code representations and scientific assessments of existing analysis techniques (FSE'22, TSE'22, ICSE'23, ICSE'24)
 
