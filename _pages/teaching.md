@@ -6,7 +6,8 @@ author_profile: true
 ---
 
 ### CSE 418/518 Software Security
-* [Spring 2025](https://chapering.github.io/teaching/cse418518)
+* [Fall 2025](https://chapering.github.io/teaching/cse418518)
+* [Spring 2025]
 
 ### CSE 410/518 Software Security
 * [Fall 2024](https://chapering.github.io/teaching/cse410518)
