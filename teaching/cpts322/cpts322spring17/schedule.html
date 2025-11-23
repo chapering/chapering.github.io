@@ -1,0 +1,274 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Cpt322 Software Engineering Principles I</title>
+    
+    <style type="text/css">
+    <!--
+    body {
+      color:#000000;
+      background-color:#FFFFFF;
+      background-image:url('Background Image');
+      background-repeat:no-repeat;
+    }
+    a  { color:#0000FF; }
+    a:visited { color:#800080; }
+    a:hover { color:#008000; }
+    a:active { color:#FF0000; }
+	h1,h2 {text-align:center;}
+	p {text-align:left;}
+	.c3 { font-size:12pt; alignment-adjust:text-before-edge;text-align:justify;}
+	.c4 { font-weight:bold;font-size:12pt }
+	
+	.hw { font-size:12pt; alignment-adjust:text-before-edge;text-align:justify;color:blue}
+	.prj { font-size:12pt; alignment-adjust:text-before-edge;text-align:justify;color:green}
+	.note { font-size:12pt; alignment-adjust:text-before-edge;text-align:justify;color:magenta}
+    -->
+    </style>
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  
+  <h1><a href="http://www.eecs.wsu.edu/~hcai/cpts322/">CptS 322</a>: Software Engineering Principles I</h1>
+  <h2>Detailed (tentative) lecture schedule (Spring 2017)</h2>
+  <hr />
+  <body>
+
+<center>  
+<table class="c3" border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
+<tbody>
+<tr class="c4">
+<td>Week</td><td>Meeting</td><td>Date</td><td>Lecture topic</td><td>Readings</td>
+<td><span class="hw">Homework assignments</span>, <span class="prj">Project progress</span>, and other <span class="note">Notes</span></td>
+</tr>
+<tr class="c3">
+<td>1</td><td>1</td><td>01/09</td><td>Introduction to course and SE</td><td>pp. 3-11</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">complete two surveys on Piazza</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>2</td><td>01/11</td><td>Course project</td><td>Document on the project</td>
+<td><span class="hw"></span><span class="prj">Project team creation; milestone 0 release; due 01/23</span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>3</td><td>01/13</td><td>Software process - generic framework</td><td>pp. 12-24</td>
+<td><span class="hw">Homework 1 release, due 01/20</span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<tr class="c3">
+<td>2</td><td>4</td><td>01/16</td><td></td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">University holiday (MLK day), no class</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>5</td><td>01/18</td><td></td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">University closure, class cancelled</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>6</td><td>01/20</td><td>Software process models (I) - process flows, sequential and incremental models</td><td>pp. 30-42</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<tr class="c3">
+<td>3</td><td>7</td><td>01/23</td><td>Software process models (II) - evolutionary models</td><td>pp. 43-50</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>8</td><td>01/25</td><td>Software process models (III) - specialized and unified models</td><td>pp. 50-62</td>
+<td><span class="hw"></span><span class="prj">project team finalization & announcement; project start, milestone 1 release, due 01/30</span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>9</td><td>01/27</td><td>Agile development; homework 1 review</td><td>pp. 65-90</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<tr class="c3">
+<td>4</td><td>10</td><td>01/30</td><td>Requirements engineering (I): overview, concepts, inception</td><td>pp. 119-137</td>
+<td><span class="hw">Homework 2 release, due 02/03</span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>11</td><td>02/01</td><td>Requirements engineering (II): elicitation and elaboration</td><td>pp. 841-859 (on UML)</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>12</td><td>02/03</td><td>Requirements engineering (III): requirements model overview; project Q &amp; A; intro to version control systems</td><td>pp. 138-145</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<tr class="c3">
+<td>5<td>13</td><td>02/06</td><td>Requirements modeling: scenario-based elements (I) - overview, basic use case diagrams; git basics (demo)</td><td>pp. 148-157</td>
+<td><span class="hw"></span><span class="prj">milestone 2 release, due 02/13</span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>14</td><td>02/08</td><td>Requirements modeling: scenario-based elements (II) - relationships in use-case diagrams, detailed/formal (tabular) use case representation  </td><td>pp. 158-163</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>15</td><td>02/10</td><td>Requirements modeling: scenario-based elements (III) - holistic use-case development with a real-world example; milestone 1 review</td><td>pp. 847-848</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<tr class="c3">
+<td>6<td>16</td><td>02/13</td><td>Requirements modeling: scenario-based elements (IV) - activity/swimlane diagrams; homework 2 review</td><td>pp. 161-164</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>17</td><td>02/15</td><td>Requirements modeling: class-based elements (I) - object-oriented concepts and data representation; analysis classes, class diagrams</td><td>pp. 842-857, pp. 164-167</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">release midterm-exam sample</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>18</td><td>02/17</td><td>Requirements modeling: class-based elements (II) - more on analysis classes and class diagrams; quick review for midterm exam</td><td>pp. 167-173, pp. 863-870</td>
+<td><span class="hw"></span><span class="prj">milestone 3 release, due 03/10;</span><span class="note">address questions on midterm</span></td>
+</tr>
+
+
+<tr class="c3">
+<td>7</td><td>19</td><td>02/20</td><td></td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">University CLASS holiday, no class</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>20</td><td>02/22</td><td>in-class midterm exam part 1</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>21</td><td>02/24</td><td>in-class midterm exam part 2</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">mid-semester class feedback survey released on Piazza, finish by 03/03</span></td>
+</tr>
+
+
+<tr class="c3">
+<td>8</td><td>22</td><td>02/27</td><td>Requirements modeling: class-based elements (III) - detailed class-relationship modeling; milestone 2 review</td><td>pp. 180-183</td>
+<td><span class="hw">Homework 3 release, due 3/10</span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>23</td><td>03/01</td><td>Requirements modeling: class-based elements (IV) - more on class-relationship modeling with more examples </td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>24</td><td>03/03</td><td>CRC modeling; a wholistic class-modeling example; Software practice: concepts and principles</td><td>pp. 173-179, pp. 96-115</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<tr class="c3">
+<td>9</td><td>25</td><td>03/06</td><td>Requirements modeling: flow-oriented elements - data/control flow modeling</td><td>pp. 186-194</td>
+<td><span class="hw"></span><span class="prj">Milestone 6 (early stage) may be started: prototyping, revised requirements, implementation of analysis classes, etc.</span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>26</td><td>03/08</td><td>Requirements modeling: behavioral elements (I) - behavioral modeling concepts, state diagrams, statechart diagrams</td><td>pp. 195-199</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>27</td><td>03/10</td><td>Requirements modeling: behavioral elements (II) - sequence diagrams, communication/collaboration diagrams </td><td>pp. 199-205; pp. 848-853 (UML)</td>
+<td><span class="hw"></span><span class="prj">Milestone 6 (early stage) should be now started;</span><span class="note"> take-home quiz release, due 3/20</span></td>
+</tr>
+
+
+<td>10</td><td>28</td><td>03/13</td><td></td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">Spring vacation, no class</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>29</td><td>03/15</td><td></td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">Spring vacation, no class</span></td>
+</tr>
+<tr class="c3">
+<td></td><td>30</td><td>03/17</td><td></td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note">Spring vacation, no class</span></td>
+</tr>
+
+
+<td>11</td><td>31</td><td>03/20</td><td>Design engineering (I): overview and concepts; milestone 3 review</td><td>pp. 215-229</td>
+<td><span class="hw">Homework 4 release, due 03/31</span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>32</td><td>03/22</td><td>Design engineering (II): more on design concepts; design models, model elements; more feedback on milestone 3</td><td>pp. 230-239</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>33</td><td>03/24</td><td>Design modeling: architectural design (I) - data/class design; architecture genre and style; homework 3 review</td><td>pp. 242-255</td>
+<td><span class="hw"></span><span class="prj">Milestone 4 release, due 04/03</span><span class="note"></span></td>
+</tr>
+
+
+<td>12</td><td>34</td><td>03/27</td><td>Design modeling: architectural design (II) - more on architecture style, architectural design methodology; architectural context</td><td>pp. 255-264</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>35</td><td>03/29</td><td>Design modeling: architectural design (III) - more on methdology, deriving architectural design from data-flow (analysis) models</td><td>pp. 265-273</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>36</td><td>03/31</td><td>Design modeling: component-level design (I) - component perspectives, class-based components, methodology</td><td>pp. 276-298</td>
+<td><span class="hw"></span><span class="prj">Milestone 5 release, due 04/16</span><span class="note"></span></td>
+</tr>
+
+
+<td>13</td><td>37</td><td>04/03</td><td>Design modeling: component-level design (II) - more on methdology, develop component design details</td><td>pp. 298-309</td>
+<td><span class="hw">Homework 5 release, due 04/14; </span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>38</td><td>04/05</td><td>Design modeling: user-interface design; milestone 4 review</td><td>pp. 312-335</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>39</td><td>04/07</td><td>Quality management (I): concepts and review techniques (defect-amplification model); more on user-interface design, deployment diagrams, and design review</td><td>pp. 398-413, pp. 416-430</td>
+<td><span class="hw"></span><span class="prj">Milestone 6 release, due 04/23</span><span class="note"></span></td>
+</tr>
+<tr>
+
+
+<td>14</td><td>40</td><td>04/10</td><td>review on design; connection between all previous milestones; homework 4 review; more on milestone 5 and homework 5</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>41</td><td>04/12</td><td>Quality management (II): more on technical reviews (defect-amplification model); concepts on software quality assurance (SQA)</td><td>pp. 432-446</td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>42</td><td>04/14</td><td>Software testing strategies: overview, unit testing, integration testing; review on DFD-to-architecture mapping for homework 5</td><td>pp. 449-478</td>
+<td><span class="hw"></span><span class="prj">Milestone 7 release, due 04/28</span><span class="note"></span></td>
+</tr>
+<tr>
+
+
+<td>15</td><td>43</td><td>04/17</td><td>Software testing techniques (I): flowchart diagram; white-box testing; more on testing strategies (validation/system testing)</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>44</td><td>04/19</td><td>Software testing techniques (II): more on white-box testing; develop unit test cases with basis-path testing</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>45</td><td>04/21</td><td>Software project management: brief introduction; milestone 5 and 6 review; black-box testing and validation test case design for milestone 7</td><td>pp. 646-662</td>
+<td><span class="hw"></span><span class="prj">Milestone 8 release, due 05/05</span><span class="note"></span></td>
+</tr>
+
+
+<td>16</td><td>46</td><td>04/24</td><td>final review (I): covering midterm; homework 5 review</td><td></td>
+<td><span class="hw"></span><span class="prj">Peer evaluation form release, due 05/05</span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>47</td><td>04/26</td><td>final review (II): covering quiz; software process, requirements analysis</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+<tr class="c3">
+<td></td><td>48</td><td>04/28</td><td>final review (III): design, quality management, testing; milestone 7 review</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+
+<td>17</td><td>49</td><td>05/04</td><td>final exam (3:10-5:10 pm, SLOAN 169)</td><td></td>
+<td><span class="hw"></span><span class="prj"></span><span class="note"></span></td>
+</tr>
+
+</tbody>
+</table>  
+</center>
+  </body>
+</html>

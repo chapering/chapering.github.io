@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Cpt322 Software Engineering Principles I</title>
+    
+    <style type="text/css">
+    <!--
+    body {
+      color:#000000;
+      background-color:#FFFFFF;
+      background-image:url('Background Image');
+      background-repeat:no-repeat;
+    }
+    a  { color:#0000FF; }
+    a:visited { color:#800080; }
+    a:hover { color:#008000; }
+    a:active { color:#FF0000; }
+	h1,h2 {text-align:center;}
+	p {text-align:left;}
+	.c3 {  font-size:12pt; alignment-adjust:text-before-edge;text-align:justify;}
+	.c4 { font-weight:bold;font-size:12pt }
+    -->
+    </style>
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  
+  <h1>CptS 322: Software Engineering Principles I</h1>
+  <h2>Spring 2018</h2>
+  <hr />
+  
+<p>
+<b>Meeting time:</b> Monday, Wednesday, Friday, 15:10 - 16:00, Jan 8 - April 27
+<br>
+<b>Location:</b> Sloan Hall 175 (Pullman campus)
+<br><br>
+<b>Instructor:</b> <a href="https://school.eecs.wsu.edu/people/faculty/haipeng-cai/">Haipeng Cai</a>
+<ul>
+<li>Office location: EME B47</li>
+<li>Email: hcai at eecs dot wsu dot edu</li>
+<li>Office hours: Monday, Wednesday, 2:00pm - 3:00pm, or by appointments</li>
+</ul>
+
+<b>Teaching Assistant</b>: Xiaoqin Fu
+<ul>
+<li>Office location: Sloan Hall 341</li>
+<li>Email: xiaoqin.fu at wsu dot edu</li>
+<li>Office hours: Tuesday, Friday, 3:00pm - 4:00pm, or by appointments</li>
+</ul>
+</p>
+
+<a href="https://piazza.com/wsu/spring2018/cpts322/home">Annoucements</a>
+<br><br>
+<a href="http://eecs.wsu.edu/~hcai/cpts322/schedule.html">Detailed lecture schedule</a>
+ 
+<p>
+<b>Resources</b>
+<ul>
+<li><a href="http://eecs.wsu.edu/~hcai/cpts322/syllabus.pdf">Course syllabus</a>
+<li><a href="https://piazza.com/wsu/spring2018/cpts322/resources">Lecture notes</a>
+<li><a href="https://piazza.com/wsu/spring2018/cpts322/resources">Homework assignments</a>
+<li><a href="https://piazza.com/wsu/spring2018/cpts322/resources">Course project</a>
+
+</ul>
+</p>
+
+<hr/>
+
+<p class="c3"><span class="c4">Course Description</span></p>
+<p class="c3">
+Software engineering is a subject that concerns the holistic process of software development, distilling the common principles for constructing and 
+maintaining quality software products independent of particular programming languages used. The core of this subject is characteristics of a lifecycle model 
+that covers different phases of software development process, including requirement analysis, software design, implementation, testing and validation, 
+evolution and maintenance. Beyond an introduction to the holistic software process at first, this course will mainly focus on the first two phases, 
+requirement analysis and design, covering object-oriented and functional paradigms.
+</p>
+
+<p class="c3"><span class="c4">Content Overview</span></p>
+<p class="c3">
+The core content is the generic software process and concrete software process models, requirement engineering and various analysis model elements, design 
+engineering and various design model elements, and introduction to quality assurance, software testing and software project management. Students will also 
+learn valuable skills necessary for software engineering practices, including using version control system, creating project plan, soliciting requirements, 
+creating design models, and practicing validation and verification activities. Students will participate in a semester long group project to gain hands-on 
+experiences applying software engineering principles and techniques.
+</p>
+
+<p class="c3"><span class="c4">Learning Objectives</span></p>
+<p class="c3">
+This course will help students achieve the following objectives:
+<ul>
+<li><span class="c3">Understand software process including the generic process framework and common instances of the framework (classical and modern process 
+models).</span></li>
+<li><span class="c3">Understand key concepts on requirements engineering, design engineering, quality assurance, risk control, and software project 
+management.</span></li>
+<li><span class="c3">Gain skills in eliciting and modeling software requirements, describing different elements (use cases, data/control flow, analysis 
+classes, and system behaviors) of a requirements model using UML.</span></li>
+<li><span class="c3">Gain skills in deriving software design, describing various design models (data objects, user interface, components, architecture, 
+deployment) using UML.</span></li>
+<li><span class="c3">Develop a basic understanding of software testing strategies and the preliminary skill in writing test cases.</span></li>
+</ul>
+</p>
+
+<p class="c3"><span class="c4">Prerequisites</span></p>
+<p class="c3"><span>Students taking this course are expected to have already taken CptS 222 or CptS 223 with a grade 
+C or better (NO concurrent enrollment). Through these prerequisite courses, students should have gained a solid 
+background in data structures and object-oriented programming (C/C++ or Java).</span></p><p class="c3"></p>
+
+<p class="c3"><span class="c4">Textbook</span></p>
+<p class="c3"><span class="c3">[SEPA] R. Pressman, </span>
+<span class="c3"><a class="c3" 
+href="https://www.amazon.com/Software-Engineering-Practitioners-Approach-International/dp/0071267824">Software Engineering: 
+A Practitioner&#39;s Approach, 7th edition,</a></span>
+<span class="c3">McGraw-Hill. 2009. ISBN-10: 0073375977. (Newer editions are good too.)</span></p>
+<p class="c3"><span class="c4">Supplemental Texts</span></p>
+<p class="c3"><span class="c3">[MMM] Frederick P. Brooks, </span>
+<span class="c3"><a class="c3" 
+href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959/ref%3Ddp_ob_title_bk">
+The Mythical Man-Month: Essays on Software Engineering,</a></span>
+<span class="c3">Anniversary Edition. Addison-Wesley Professional. ISBN-10: 0201835959.</span></p>
+<p class="c3"><span class="c3">[ISSE] Ian Sommerville, </span>
+<span class="c3"><a class="c3" 
+href="https://www.amazon.com/Software-Engineering-9th-Ian-Sommerville/dp/0137035152">
+Software Engineering, 9th edition,</a></span>
+<span class="c3">Addison-Wesley. ISBN-10: 0137035152.</span></p>
+
+<p class="c3"><span class="c4">Content Outline</span>
+</p>
+<table class="c3" border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
+<tbody>
+<tr class="c4">
+<td>Topic</td>
+<td>Related textbook chapters</td>
+</tr>
+<tr class="c3">
+<td>Course overview and introduction to software engineering</td>
+<td>1</td>
+</tr>
+<tr class="c3">
+<td>Software life cycle and process model</td>
+<td>2</td>
+</tr>
+<tr class="c3">
+<td>Agile development</td>
+<td>3</td>
+</tr>
+<tr class="c3">
+<td>Software practices</td>
+<td>4</td>
+</tr>
+<tr class="c3">
+<td>Software requirement engineering</td>
+<td>5</td>
+</tr>
+<tr class="c3">
+<td>Requirements modeling</td>
+<td>6-7</td>
+</tr>
+<tr class="c3">
+<td>Software design engineering</td>
+<td>8</td>
+</tr>
+<tr class="c3">
+<td>Architectural and component-level designs</td>
+<td>9-10</td>
+</tr>
+<tr class="c3">
+<td>User interface design</td>
+<td>11</td>
+</tr>
+<tr class="c3">
+<td>Quality management</td>
+<td>14-16</td>
+</tr>
+<tr class="c3">
+<td>Software testing strategies</td>
+<td>17</td>
+</tr>
+<tr class="c3">
+<td>Software testing techniques</td>
+<td>18-19</td>
+</tr>
+<tr class="c3">
+<td>Software project management</td>
+<td>24</td>
+</tr>
+</tbody>
+</table>
+
+<p class="c3"><span class="c4">Grading</span></p>
+<p class="c3"><span>
+The final course grade will be calculated using the following breakdown and be converted from numeric numbers to letter grades using the scale mapping as 
+follows. In addition to these basic components of grade, extra/bonus points can be earned through quizzes and extended class participation. There are three 
+forms of extended class participation: in-class discussion, Piazza activities, and office-hour attendance. It is at the instructor’s discretion to calculate 
+the extra/bonus points at the end of the semester.</span></p>
+<table class="c3" border="0" cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
+<tbody>
+<tr><td><p class="c3"><span class="c3">Breakdown</span></p></td><td><p class="c3"><span class="c3">Scale mapping</span></p></td></tr>
+<tr>
+<td>
+
+<table class="c3" border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
+<tbody>
+<tr class="c3">
+<td>Participation</td>
+<td>5%</td>
+</tr>
+<tr class="c3">
+<td>Homework</td>
+<td>15%</td>
+</tr>
+<tr class="c3">
+<td>Project</td>
+<td>40%</td>
+</tr>
+<tr class="c3">
+<td>Midterm exam</td>
+<td>20%</td>
+</tr>
+<tr class="c3">
+<td>Final exam</td>
+<td>20%</td>
+</tr>
+</tbody>
+</table>
+
+</td>
+<td>
+
+<table class="c3" border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
+<tbody>
+<tr class="c3">
+<td>Score</td>
+<td>Letter grade</td>
+<td>Score</td>
+<td>Letter grade</td>
+<td>Score</td>
+<td>Letter grade</td>
+</tr>
+<tr class="c3">
+<td>&gt;=93</td>
+<td>A</td>
+<td>[80,83)</td>
+<td>B-</td>
+<td>[66,70)</td>
+<td>D+</td>
+</tr>
+<tr class="c3">
+<td>[90,93)</td>
+<td>A-</td>
+<td>[77,80)</td>
+<td>C+</td>
+<td>[60,66)</td>
+<td>D</td>
+</tr>
+<tr class="c3">
+<td>[87,90)</td>
+<td>B+</td>
+<td>[73,77)</td>
+<td>C</td>
+<td>&lt;60</td>
+<td>F</td>
+</tr>
+<tr class="c3">
+<td>[83,87)</td>
+<td>B</td>
+<td>[70,73)</td>
+<td>C-</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<p class="c3"><span class="c4">Communication</span></p>
+<p class="c3"><span class="c3">
+We will communicate announcements and lecture notes as well as 
+off-class Q&amp;A and extended discussions through <a class="c3" href="https://piazza.com/"><b>Pizza</b></a>.
+Blackboard will be used also but mainly for homework and project milestone submission and grading. 
+Please make sure you have activated your Piazza account and joined this course over there as soon as possible. For questions on course materials, lectures, 
+homework assignments, and course project milestones, contact the instructor/TA on Piazza by sending private posts instead of by emails to facilitate 
+communication management (unless you change the privacy setting per post, your posting will be private by default and only the instructor/TA can access it). 
+The course Piazza site is <a class="c3" href="https://piazza.com/wsu/spring2018/cpts322/home">https://piazza.com/wsu/spring2018/cpts322/home</a>.
+</span></p>
+
+<p class="c3"><span class="c4">Participation</span></p>
+<p class="c3"><span class="c3">
+Class attendance is required at all lectures. Although supplementary slides and assigned readings will be posted online, these materials as well as the recommended textbooks are only used as references by the instructor in developing the lectures. Thus, studying these materials and textbooks serves the purpose of getting better prepared for attending in-class lectures, but would by no means substitute for class attendance. Also, the course project requires each team member to be responsible and collaborative as well as to contribute equally; thus, missing lectures without justifiable reasons and then relying on other team members to catch up missed topics is not acceptable. You are also expected to participate in class discussion, which aids learning and provides valuable feedback on the lecture. Lectures will be delivered mainly through whiteboard. It is the students' responsibility to take their own notes during lectures. 
+</span></p>
+
+<p class="c3"><span>
+If you know you will miss a lecture for a justifiable reason such as a university activity, religious holiday, military service, or a medical appointment, notify the instructor by email or phone call at least 12 hours before the lecture. If you are participating in a university activity the supervisor of the activity should provide you with documentation. Others should provide a written explanation in their own words by email -- documentation from medical personnel is NOT required but you must document the absence. If you are unexpectedly sick or otherwise unable to attend due to an emergency, contact the instructor as soon as possible. If you miss a class for these justifiable reasons, arrange with a fellow student to get and digest the corresponding notes, and go to the instructor’s office hours for further help if needed.
+</span></p>
+
+<p class="c3"><span>
+While attendance will not be taken in every class, it will be sampled randomly at the discretion of the instructor. The basic participation credit that accounts for 5% in final grade will be calculated using the sampled attendance records. Bonus points can be earned through the extended participation as described in the section on grading above.
+</span></p>
+
+<p class="c3"><span>
+Prior to each lecture, students are expected to complete the assigned reading. The reading materials for each lecture 
+can be found in the <a href="http://eecs.wsu.edu/~hcai/cpts322/schedule.html">detailed class schedule</a>. Most of these 
+readings are textbook sections that are closely related to the lecture topic, but some readings are chosen from other sources such as the supplementary 
+materials specified. Note that the schedule is subject to change, and it is the responsibility of students to regularly check out the schedule page.
+In addition, students are expected to maintain a professional and respectful classroom environment, 
+for which students are suggested to:</span></p>
+<ul>
+<li><span class="c3">Silence personal electronics (non-disruptive ones may be used during class)</span></li>
+<li><span class="c3">Arrive on time and attend the entire class session</span></li>
+</ul>
+
+<p class="c3"><span class="c4">Homework and Project</span></p>
+<p class="c3"><span>
+Homework assignments usually require 1-2 weeks to complete. These assignments with respective due dates will be announced in class and 
+posted on Blackboard (and Piazza). You are encouraged to take advantage of office hours of both the instructor and TA if you have questions for 
+homework/project assignments.
+</span></p>
+
+<p class="c3"><span> 
+The progress of a semester-long group project will be measured by milestones. The objectives, requirements, and deadline of each milestone will be 
+communicated the same way the homework assignments are managed. For each milestone, your group will be required to submit a written report, code, and/or test 
+cases to demonstrate the progress of the group. Each member of the group will initially receive the same credit based on the quality and timeliness of group 
+submissions, and will be later adjusted according to in-group peer evaluation by the end of the project.
+</span></p>
+
+<p class="c3"><span>
+Unless specified otherwise, each homework or project milestone shall be created and submitted electronically as a single PDF on Blackboard prior to the 
+deadline which is 11:59 pm of the posted due date. Typically the homeworks are due on Fridays and project milestones on Mondays. 
+</span></p>
+
+<p class="c3"><span class="c4">Late submission policy</span></p>
+<p class="c3"><span>
+NO late homework or project milestone submissions will be accepted unless the instructor grants an extension upon request by individual students/groups via email at least 24 hours before the deadline. 
+</span></p>
+
+<p class="c3"><span>
+If an extension is granted, the penalty of late submission is 2% point deduction for every day after the original deadline. The instructor may allow for late submissions without penalty if extenuating cases are explained in the notice email sent to the instructor. 
+</span></p>
+
+<p class="c3"><span>
+Note that by the end of the semester, it is the university’s policy that missing any homework or project milestone submission without prior notice and extension approval will lead to an “I” (incomplete) grade for the responsible students---that means an I grade for the course, NOT just for the associated assignment. So if you submit an assignment late without notice/approval, you may just receive a zero grade for that assignment alone, but if you miss an assignment in the end you will get an ‘I’ grade for the course as a whole (that is what the grade means: the student does not complete the coursework!) Students missing an exam by the end of semester will also receive an 'I' grade for this course. 
+</span></p>
+
+<p class="c3"><span class="c4">Academic Integrity / Honor Code</span></p>
+<p class="c3"><span>The fundamental requirement for all student work in this class is: Unless otherwise explicitly permitted by the 
+instructor, all work you turn in must be your own. Any instance of academic dishonesty, as defined in the WSU Student Handbook, in 
+this class will be dealt with severely (typically by failing the class) and reported to the WSU Office of Student Conduct. Note in 
+particular that it is dishonest not only to copy another student&#39;s work, but to permit another student to copy yours. 
+Nevertheless, realizing that students can assist each other in understanding general course material, there are limited ways in 
+which student collaboration is permitted:</span></p>
+<ul>
+<li><span class="c3">You may communicate verbally with another student, as long as you do not communicate the answer or the other 
+content of what you are going to turn in, whether code, mathematics, and/or text. A good way to work in this regard is for 
+the student providing help to ask leading questions of the student needing help, letting them arrive at 
+the answer themselves.</span></li>
+<li><span class="c3">You may draw diagrams and such on a whiteboard, chalkboard, or piece of blank paper to illustrate the 
+verbal points made in (1), as long as you do not write what you are going to turn in.</span></li>
+</ul>
+<p class="c3"><span>It will be up to the discretions of the grader (if applicable) and instructor to determine if any assignment 
+shows evidence of collaboration beyond these limits. Any attempt to circumvent the spirit of these rules will be treated as a 
+violation of the fundamental requirement. If you are in doubt, do not give help to or request it from another student: That&#39;s 
+what office hours are for. Information on WSU Academic Integrity can be found at 
+<a class="c3" href="https://www.academicintegrity.wsu.edu/">www.academicintegrity.wsu.edu</a></span><span>&nbsp;and 
+<a class="c3" href="https://conduct.wsu.edu/">conduct.wsu.edu</a>, and the WSU Honor code is on 
+<a class="c3" href="https://provost.wsu.edu/tag/wsu-honor-code">https://provost.wsu.edu/tag/wsu-honor-code/.</a>
+Please also read <a class="c3" href="http://www.eecs.wsu.edu/~schneidj/Misc/academic-integrity.html">
+the EECS Academic Integrity Policy</a> carefully. Use these resources to ensure that you do not inadvertently violate 
+WSU&#39;s standard of conduct.</span></p>
+
+<p class="c3"><span class="c4">Accommodations</span></p>
+<p class="c3"><span>Reasonable accommodations are available for students who have a documented disability. Classroom 
+accommodation forms are available through the Access Center (Washington Building 217; 509-335-3417). If you have a disability and 
+need accommodations to fully participate in this class, please either visit or call the Access Center (Washington Building 217; 
+509-335-3417) to schedule an appointment with an Access Advisor. All accommodations MUST be approved through the Access Center. 
+For more information, consult the webpage <a class="c3" 
+href="http://accesscenter.wsu.edu/">http://accesscenter.wsu.edu</a> or email at Access.Center@wsu.edu.</span></p>
+
+<p class="c3"><span class="c4">Safety Information</span></p>
+<p class="c3"><span>The <a href="http://safetyplan.wsu.edu/">Campus Safety Plan</a> contains a comprehensive listing of 
+university policies, procedures, statistics, and information relating to campus safety. The 
+<a href="http://oem.wsu.edu/">University Emergency Management</a> provides campus safety and emergency information. 
+The <a href="http://alert.wsu.edu/">University Emergency Alert</a> provides information about emergencies and 
+communication resources WSU will use to provide warning and notification during emergencies.</span></p>
+<p class="c3"><span class="c3"><a href="https://faculty.wsu.edu/classroom-safety/">Classroom Safety</a> is also of paramount 
+importance at Washington State University, and is the shared responsibility of the entire campus population. WSU urges 
+students to follow the &quot;Alert, Assess, Act&quot; protocol for all types of emergencies and the 
+<a href="https://www.fbi.gov/about-us/cirg/active-shooter-and-mass-casualty-incidents/run-hide-fight-video/">
+&quot;Run, Hide, Fight&quot;</a> response for an active shooter incident. Remain ALERT (through direct observation or 
+emergency notification), ASSESS your specific situation, and act in most appropriate way to assure your own safety (and the 
+safety of others if you are able). Please sign up for emergency alerts on your account at MyWSU.</span></p>
+  </body>
+</html>
