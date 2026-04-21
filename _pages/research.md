@@ -30,7 +30,7 @@ Research in the group currently focuses on the <em>security and other quality as
 
 ## Current Projects
 
-* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21, TOSEM'24, CSUR'25)
+* Scalable and cost-effective program analysis techniques for industry-scale **distributed software systems** and their applications to the maintenance, evolution, and security analysis of those systems and, more broadly, autonomic information **security defense in adversarial and dynamic environments** (ASE'16, TOSEM'20, TSE'21, USENIX Security'21, TOSEM'24, CSUR'25, FSE'26)
 
 * Program analysis and run-time support for testing and validation of **multi-language software systems**, and their applications to discovering and diagnosing correctness bugs and security vulnerabilities across (programming) language boundaries (USENIX Security'22, FSE'22, USENIX Security'23, ICSE'23, CCS'23, TOSEM'23, TSE'24, FSE'24, FSE'25)
 

@@ -4,6 +4,8 @@ title: "Teaching"
 permalink: /teaching/
 author_profile: true
 ---
+### CSE 713 Software Analysis and Applications
+* [Spring 2026](https://chapering.github.io/teaching/cse713)
 
 ### CSE 418/518 Software Security
 * [Fall 2025](https://chapering.github.io/teaching/cse418518)
