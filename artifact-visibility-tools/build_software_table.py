@@ -20,6 +20,7 @@ CENTRAL_REPO_ALIASES = {
 
 KNOWN_GITHUB_ALTERNATIVES = {
     "baltsers/PyRTFuzz": ["awen-li/PyRTFuzz"],
+    "baltsers/polycruise": ["awen-li/PolyCruise"],
     "baltsers/PolyFuzz": ["awen-li/PolyFuzz"],
     "baltsers/PCA-tool": ["awen-li/PCA"],
     "baltsers/PolyFax": ["awen-li/PolyFax"],
@@ -28,11 +29,12 @@ KNOWN_GITHUB_ALTERNATIVES = {
 KNOWN_FALLBACK_GITHUB_ARTIFACTS = {
     "PolyCruise: A Cross-Language Dynamic Information Flow Analysis": {
         "name": "PolyCruise",
-        "full_name": "awen-li/PolyCruise",
-        "html_url": "https://github.com/awen-li/PolyCruise",
+        "full_name": "baltsers/polycruise",
+        "html_url": "https://github.com/baltsers/polycruise",
         "description": "Artifact for: PolyCruise: A Cross-Language Dynamic Information Flow Analysis",
-        "stars": 30,
-        "forks": 5,
+        "stars": 0,
+        "forks": 0,
+        "watchers": 0,
         "issues": 0,
     },
 }
@@ -412,6 +414,8 @@ def build_artifacts(bib_rows, stats_rows, repos):
     for art in artifacts.values():
         for repo in KNOWN_GITHUB_ALTERNATIVES.get(art["centralRepo"], []):
             add_github_repo(art, repo, f"https://github.com/{repo}")
+        if not art["centralRepo"].startswith("baltsers/"):
+            art["alternativeArtifacts"][art["centralUrl"]] = "GitHub"
         unique_repos = []
         for repo in art["githubRepos"]:
             repo = canonical_github_repo(repo)
