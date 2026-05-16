@@ -521,57 +521,66 @@ def render_table(artifacts):
         paper_html = "".join(f"<li>{html.escape(p)}</li>" for p in art["papers"])
         rows.append(
             f'''<tr data-artifact-id="{html.escape(art["id"])}">
-  <td><a class="artifact-name" href="{html.escape(art["centralUrl"])}">{html.escape(art["name"])}</a></td>
-  <td>{badge_html}</td>
-  <td>{", ".join(alt_links) if alt_links else "N/A"}</td>
-  <td class="metric" data-stat="views">{html.escape(str(art["cached"]["views"]))}</td>
-  <td class="metric" data-stat="downloads">{html.escape(str(art["cached"]["downloads"]))}</td>
-  <td class="metric" data-stat="stars">{html.escape(str(art["cached"]["stars"]))}</td>
-  <td class="metric" data-stat="forks">{html.escape(str(art["cached"]["forks"]))}</td>
-  <td class="metric" data-stat="watchers">{html.escape(str(art["cached"].get("watchers", "N/A")))}</td>
-  <td class="metric" data-stat="open_issues">{html.escape(str(art["cached"].get("open_issues", "N/A")))}</td>
-  <td class="metric" data-stat="open_prs">{html.escape(str(art["cached"].get("open_prs", "N/A")))}</td>
-  <td><ul class="artifact-papers">{paper_html}</ul></td>
+  <td data-sort="artifact"><a class="artifact-name" href="{html.escape(art["centralUrl"])}">{html.escape(art["name"])}</a></td>
+  <td data-sort="badges">{badge_html}</td>
+  <td data-sort="alternatives">{", ".join(alt_links) if alt_links else "N/A"}</td>
+  <td class="metric" data-sort="views" data-stat="views">{html.escape(str(art["cached"]["views"]))}</td>
+  <td class="metric" data-sort="downloads" data-stat="downloads">{html.escape(str(art["cached"]["downloads"]))}</td>
+  <td class="metric" data-sort="stars" data-stat="stars">{html.escape(str(art["cached"]["stars"]))}</td>
+  <td class="metric" data-sort="forks" data-stat="forks">{html.escape(str(art["cached"]["forks"]))}</td>
+  <td class="metric" data-sort="watchers" data-stat="watchers">{html.escape(str(art["cached"].get("watchers", "N/A")))}</td>
+  <td class="metric" data-sort="open_issues" data-stat="open_issues">{html.escape(str(art["cached"].get("open_issues", "N/A")))}</td>
+  <td class="metric" data-sort="open_prs" data-stat="open_prs">{html.escape(str(art["cached"].get("open_prs", "N/A")))}</td>
+  <td data-sort="papers"><ul class="artifact-papers">{paper_html}</ul></td>
 </tr>'''
         )
 
     return f'''{START}
 <style>
-.artifact-tools-wrap {{ margin-top: 1.75rem; }}
-.artifact-tools-meta {{ color: #666; font-size: 0.9rem; margin-bottom: 0.75rem; }}
-.artifact-tools-table {{ border-collapse: collapse; width: 100%; font-size: 0.86rem; }}
-.artifact-tools-table th, .artifact-tools-table td {{ border: 1px solid #ddd; padding: 0.45rem 0.5rem; vertical-align: top; }}
-.artifact-tools-table th {{ background: #f5f6f7; font-weight: 700; }}
-.artifact-tools-table td.metric, .artifact-tools-table th.metric {{ text-align: right; white-space: nowrap; }}
-.artifact-tools-table .artifact-name {{ font-weight: 700; }}
-.artifact-tools-table .artifact-badge {{ display: inline-block; border: 1px solid #88a; border-radius: 3px; padding: 0.05rem 0.28rem; margin: 0.08rem; font-size: 0.76rem; background: #f7f9ff; color: #334; }}
+.artifact-tools-wrap {{ margin-top: 2rem; }}
+.artifact-tools-meta {{ color: #5f6671; font-size: 0.9rem; line-height: 1.45; margin-bottom: 0.9rem; }}
+.artifact-table-scroll {{ border: 1px solid #d9dee7; border-radius: 8px; box-shadow: 0 8px 22px rgba(20, 35, 55, 0.08); overflow-x: auto; }}
+.artifact-tools-table {{ border-collapse: separate; border-spacing: 0; width: 100%; font-size: 0.86rem; background: #fff; }}
+.artifact-tools-table th, .artifact-tools-table td {{ border-bottom: 1px solid #e5e9f0; padding: 0.55rem 0.62rem; vertical-align: top; }}
+.artifact-tools-table th {{ background: #f6f8fb; color: #253044; font-weight: 700; position: sticky; top: 0; z-index: 1; }}
+.artifact-tools-table tbody tr:nth-child(even) {{ background: #fbfcfe; }}
+.artifact-tools-table tbody tr:hover {{ background: #f2f7ff; }}
+.artifact-tools-table td.metric, .artifact-tools-table th.metric {{ text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }}
+.artifact-tools-table .artifact-name {{ color: #1f5f9f; font-weight: 700; }}
+.artifact-tools-table .artifact-badge {{ display: inline-block; border: 1px solid #b6c6e6; border-radius: 999px; padding: 0.08rem 0.42rem; margin: 0.08rem; font-size: 0.75rem; background: #eef4ff; color: #28446c; }}
 .artifact-tools-table .artifact-papers {{ margin: 0; padding-left: 1.1rem; }}
 .artifact-tools-table .artifact-papers li {{ margin-bottom: 0.25rem; }}
-@media (max-width: 900px) {{ .artifact-tools-table {{ display: block; overflow-x: auto; }} }}
+.artifact-sort-button {{ align-items: center; background: transparent; border: 0; color: inherit; cursor: pointer; display: inline-flex; font: inherit; font-weight: 700; gap: 0.32rem; justify-content: inherit; margin: 0; padding: 0; text-align: inherit; width: 100%; }}
+.artifact-sort-button:hover {{ color: #1f5f9f; }}
+.artifact-sort-indicator {{ color: #667085; font-size: 0.68rem; min-width: 2.1rem; text-transform: uppercase; }}
+.artifact-sort-button[aria-pressed="true"] .artifact-sort-indicator {{ color: #1f5f9f; }}
+@media (max-width: 900px) {{ .artifact-table-scroll {{ border-radius: 6px; }} }}
 </style>
 <div class="artifact-tools-wrap" id="artifact-tools">
 <h2>Artifact Index</h2>
 <p class="artifact-tools-meta">Artifact links point to validated GitHub repositories, preferring the <a href="https://github.com/baltsers">baltsers</a> mirror when one is available. Public counters refresh in the browser when GitHub/Zenodo APIs are reachable. GitHub traffic views are not publicly exposed, so repository views remain N/A unless an alternative artifact host exposes views.</p>
+<div class="artifact-table-scroll">
 <table class="artifact-tools-table">
   <thead>
     <tr>
-      <th>Artifact</th>
-      <th>Badges</th>
-      <th>Alternative artifacts</th>
-      <th class="metric">#Views</th>
-      <th class="metric">#Downloads</th>
-      <th class="metric">#Stars</th>
-      <th class="metric">#Forks</th>
-      <th class="metric">#Watchers</th>
-      <th class="metric">#Open Issues</th>
-      <th class="metric">#Open PRs</th>
-      <th>Associated papers</th>
+      <th scope="col"><button class="artifact-sort-button" type="button" data-sort-key="artifact" data-sort-type="text">Artifact <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col"><button class="artifact-sort-button" type="button" data-sort-key="badges" data-sort-type="text">Badges <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col"><button class="artifact-sort-button" type="button" data-sort-key="alternatives" data-sort-type="text">Alternative artifacts <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="views" data-sort-type="number">#Views <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="downloads" data-sort-type="number">#Downloads <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="stars" data-sort-type="number">#Stars <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="forks" data-sort-type="number">#Forks <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="watchers" data-sort-type="number">#Watchers <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="open_issues" data-sort-type="number">#Open Issues <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col" class="metric"><button class="artifact-sort-button" type="button" data-sort-key="open_prs" data-sort-type="number">#Open PRs <span class="artifact-sort-indicator"></span></button></th>
+      <th scope="col"><button class="artifact-sort-button" type="button" data-sort-key="papers" data-sort-type="text">Associated papers <span class="artifact-sort-indicator"></span></button></th>
     </tr>
   </thead>
   <tbody>
 {chr(10).join(rows)}
   </tbody>
 </table>
+</div>
 </div>
 <script>window.LAB_ARTIFACTS = {data};</script>
 <script>
@@ -584,6 +593,81 @@ def render_table(artifacts):
   }};
   const sumNumbers = values => sumKnown(values);
   const addNumbers = (a, b) => sumKnown([a, b]);
+  const sortState = {{ key: null, type: null, direction: null }};
+  let sortRefreshTimer = null;
+
+  function sortValue(row, key, type) {{
+    const el = row.querySelector('[data-sort="' + key + '"]');
+    const raw = el ? el.textContent.trim() : "";
+    if (type === "number") {{
+      const value = Number(raw.replace(/,/g, ""));
+      return {{ known: Number.isFinite(value), value }};
+    }}
+    return {{ known: true, value: raw.toLowerCase() }};
+  }}
+
+  function artifactName(row) {{
+    const el = row.querySelector('[data-sort="artifact"]');
+    return el ? el.textContent.trim().toLowerCase() : "";
+  }}
+
+  function compareRows(a, b, key, type, direction) {{
+    const av = sortValue(a, key, type);
+    const bv = sortValue(b, key, type);
+    if (type === "number") {{
+      if (av.known !== bv.known) return av.known ? -1 : 1;
+      const delta = av.value - bv.value;
+      if (delta !== 0) return direction === "asc" ? delta : -delta;
+      return artifactName(a).localeCompare(artifactName(b));
+    }}
+    const delta = av.value.localeCompare(bv.value);
+    if (delta !== 0) return direction === "asc" ? delta : -delta;
+    return artifactName(a).localeCompare(artifactName(b));
+  }}
+
+  function updateSortButtons(key, direction) {{
+    document.querySelectorAll("#artifact-tools .artifact-sort-button").forEach(button => {{
+      const active = button.dataset.sortKey === key;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+      const indicator = button.querySelector(".artifact-sort-indicator");
+      if (indicator) indicator.textContent = active ? direction : "";
+      const th = button.closest("th");
+      if (th) th.setAttribute("aria-sort", active ? (direction === "asc" ? "ascending" : "descending") : "none");
+    }});
+  }}
+
+  function sortTable(key, type, direction) {{
+    const tbody = document.querySelector("#artifact-tools tbody");
+    if (!tbody) return;
+    Array.from(tbody.querySelectorAll("tr"))
+      .sort((a, b) => compareRows(a, b, key, type, direction))
+      .forEach(row => tbody.appendChild(row));
+    sortState.key = key;
+    sortState.type = type;
+    sortState.direction = direction;
+    updateSortButtons(key, direction);
+  }}
+
+  function scheduleCurrentSort() {{
+    if (!sortState.key) return;
+    window.clearTimeout(sortRefreshTimer);
+    sortRefreshTimer = window.setTimeout(() => sortTable(sortState.key, sortState.type, sortState.direction), 80);
+  }}
+
+  function setupSorting() {{
+    document.querySelectorAll("#artifact-tools .artifact-sort-button").forEach(button => {{
+      button.addEventListener("click", () => {{
+        const key = button.dataset.sortKey;
+        const type = button.dataset.sortType || "text";
+        const sameColumn = sortState.key === key;
+        const direction = sameColumn
+          ? (sortState.direction === "asc" ? "desc" : "asc")
+          : (type === "number" ? "desc" : "asc");
+        sortTable(key, type, direction);
+      }});
+    }});
+  }}
+
   async function getJSON(url) {{
     const res = await fetch(url, {{ headers: {{ "Accept": "application/json" }} }});
     if (!res.ok) throw new Error(res.status + " " + url);
@@ -622,6 +706,7 @@ def render_table(artifacts):
     if (isKnownNumber(value)) setCell(id, key, value);
   }}
   document.addEventListener("DOMContentLoaded", function () {{
+    setupSorting();
     (window.LAB_ARTIFACTS || []).forEach(async artifact => {{
       try {{
         const repos = artifact.githubRepos || [artifact.centralRepo];
@@ -643,6 +728,7 @@ def render_table(artifacts):
         if (zen.views !== "N/A") setCell(artifact.id, "views", zen.views);
         const nonGithubDownloads = zen.downloads !== "N/A" ? zen.downloads : nonGithub.downloads;
         setCellIfKnown(artifact.id, "downloads", sumKnown([nonGithubDownloads, ghDownloads]));
+        scheduleCurrentSort();
       }} catch (_) {{}}
     }});
   }});
