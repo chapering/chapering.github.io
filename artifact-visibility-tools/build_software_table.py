@@ -27,6 +27,16 @@ KNOWN_GITHUB_ALTERNATIVES = {
 }
 
 KNOWN_FALLBACK_GITHUB_ARTIFACTS = {
+    "VerLog: Enhancing Release Note Generation for Android Apps using Large Language Models": {
+        "name": "Verlog",
+        "full_name": "baltsers/Verlog",
+        "html_url": "https://github.com/baltsers/Verlog",
+        "description": "Artifact for: VerLog: Enhancing Release Note Generation for Android Apps using Large Language Models",
+        "stars": 0,
+        "forks": 0,
+        "watchers": 0,
+        "issues": 0,
+    },
     "PolyCruise: A Cross-Language Dynamic Information Flow Analysis": {
         "name": "PolyCruise",
         "full_name": "baltsers/polycruise",
@@ -104,6 +114,7 @@ def parse_bib(path):
             "booktitle",
             "journal",
             "url_project",
+            "url_docker",
             "doi",
             "note",
         ]:
@@ -220,6 +231,16 @@ def find_central_repo(row, repos):
     exact = [r for r in repos if title and title in r["description"].lower()]
     if exact:
         return exact[0]
+    artifact_name = clean_tex(row.get("title", "")).split(":", 1)[0].strip().lower()
+    if artifact_name:
+        by_name = [
+            r
+            for r in repos
+            if r["name"].lower() == artifact_name
+            or r["full_name"].lower() == f"baltsers/{artifact_name}"
+        ]
+        if by_name:
+            return by_name[0]
     return None
 
 
@@ -229,6 +250,8 @@ def parse_platform(url):
         return "Figshare"
     if "zenodo.org" in host:
         return "Zenodo"
+    if "hub.docker.com" in host:
+        return "Docker Hub"
     if "github.com" in host:
         return "GitHub"
     if "bitbucket.org" in host:
@@ -288,6 +311,48 @@ def build_artifacts(bib_rows, stats_rows, repos):
     def fallback_match(row):
         return KNOWN_FALLBACK_GITHUB_ARTIFACTS.get(row["title"])
 
+    def artifact_name_from_title(title):
+        title = clean_tex(title)
+        return title.split(":", 1)[0].strip() or "Artifact"
+
+    def slugify(value):
+        return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-") or "artifact"
+
+    def external_artifact(row):
+        name = artifact_name_from_title(row.get("title", ""))
+        slug = slugify(name)
+        return {
+            "name": name,
+            "full_name": f"external/{slug}",
+            "html_url": normalize_url(row["url_project"]),
+            "description": f"Artifact for: {row.get('title', name)}",
+            "stars": "N/A",
+            "forks": "N/A",
+            "watchers": "N/A",
+            "issues": "N/A",
+        }
+
+    def is_external_artifact_candidate(row):
+        host = urlparse(normalize_url(row["url_project"])).netloc.lower()
+        path = urlparse(normalize_url(row["url_project"])).path.lower()
+        if host in {"doi.org", "dx.doi.org"}:
+            return False
+        if host == "chapering.github.io" and not path.startswith("/projects/"):
+            return False
+        allowed = [
+            "github.com",
+            "bitbucket.org",
+            "zenodo.org",
+            "figshare.com",
+            "hub.docker.com",
+            "4open.science",
+            "anonymous.4open.science",
+            "chapering.github.io",
+            "sites.google.com",
+            "sourceforge.net",
+        ]
+        return any(needle in host for needle in allowed)
+
     def add_github_repo(art, repo_full_name, url=None, as_alternative=True):
         repo_full_name = canonical_github_repo(repo_full_name)
         if repo_full_name not in art["githubRepos"]:
@@ -301,11 +366,12 @@ def build_artifacts(bib_rows, stats_rows, repos):
         repo = repos_by_full_name.get(canonical_name, chosen_repo)
         key = repo["full_name"]
         if key not in artifacts:
+            central_github_repo = parse_github_repo(repo["html_url"])
             artifacts[key] = {
                 "id": re.sub(r"[^a-z0-9]+", "-", repo["name"].lower()).strip("-"),
                 "name": repo["name"],
                 "centralRepo": repo["full_name"],
-                "githubRepos": [repo["full_name"]],
+                "githubRepos": [central_github_repo or repo["full_name"]] if central_github_repo else [],
                 "centralUrl": repo["html_url"],
                 "cached": {
                     "views": "N/A",
@@ -339,6 +405,9 @@ def build_artifacts(bib_rows, stats_rows, repos):
             art["alternativeArtifacts"][alt] = parse_platform(alt)
         if gh_alt and gh_alt not in art["githubRepos"]:
             add_github_repo(art, gh_alt, f"https://github.com/{gh_alt}")
+        docker = normalize_url(row.get("url_docker"))
+        if docker and docker != art["centralUrl"].rstrip("/"):
+            art["alternativeArtifacts"][docker] = parse_platform(docker)
         for b in badges(row):
             if b not in art["badges"]:
                 art["badges"].append(b)
@@ -402,6 +471,12 @@ def build_artifacts(bib_rows, stats_rows, repos):
     for group_key, group_rows in groups.items():
         candidates = list(group_candidates.get(group_key, {}).values())
         if not candidates:
+            for row in group_rows:
+                if row["key"] in assigned:
+                    continue
+                if not is_external_artifact_candidate(row):
+                    continue
+                assigned[row["key"]] = add_row_to_artifact(row, external_artifact(row))
             continue
         for row in group_rows:
             if row["key"] in assigned:
@@ -440,7 +515,7 @@ def build_artifacts(bib_rows, stats_rows, repos):
     for art in artifacts.values():
         for repo in KNOWN_GITHUB_ALTERNATIVES.get(art["centralRepo"], []):
             add_github_repo(art, repo, f"https://github.com/{repo}")
-        if not art["centralRepo"].startswith("baltsers/"):
+        if parse_github_repo(art["centralUrl"]) and not art["centralRepo"].startswith("baltsers/"):
             art["alternativeArtifacts"][art["centralUrl"]] = "GitHub"
         unique_repos = []
         for repo in art["githubRepos"]:
