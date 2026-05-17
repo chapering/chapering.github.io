@@ -18,7 +18,7 @@ main:
   - title: "Services"
     url: /services/    
 
-  - title: "Tools"
+  - title: "Tools/Artifacts"
     url: /software/
     
 #  - title: "News"
