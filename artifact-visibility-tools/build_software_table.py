@@ -311,48 +311,6 @@ def build_artifacts(bib_rows, stats_rows, repos):
     def fallback_match(row):
         return KNOWN_FALLBACK_GITHUB_ARTIFACTS.get(row["title"])
 
-    def artifact_name_from_title(title):
-        title = clean_tex(title)
-        return title.split(":", 1)[0].strip() or "Artifact"
-
-    def slugify(value):
-        return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-") or "artifact"
-
-    def external_artifact(row):
-        name = artifact_name_from_title(row.get("title", ""))
-        slug = slugify(name)
-        return {
-            "name": name,
-            "full_name": f"external/{slug}",
-            "html_url": normalize_url(row["url_project"]),
-            "description": f"Artifact for: {row.get('title', name)}",
-            "stars": "N/A",
-            "forks": "N/A",
-            "watchers": "N/A",
-            "issues": "N/A",
-        }
-
-    def is_external_artifact_candidate(row):
-        host = urlparse(normalize_url(row["url_project"])).netloc.lower()
-        path = urlparse(normalize_url(row["url_project"])).path.lower()
-        if host in {"doi.org", "dx.doi.org"}:
-            return False
-        if host == "chapering.github.io" and not path.startswith("/projects/"):
-            return False
-        allowed = [
-            "github.com",
-            "bitbucket.org",
-            "zenodo.org",
-            "figshare.com",
-            "hub.docker.com",
-            "4open.science",
-            "anonymous.4open.science",
-            "chapering.github.io",
-            "sites.google.com",
-            "sourceforge.net",
-        ]
-        return any(needle in host for needle in allowed)
-
     def add_github_repo(art, repo_full_name, url=None, as_alternative=True):
         repo_full_name = canonical_github_repo(repo_full_name)
         if repo_full_name not in art["githubRepos"]:
@@ -367,9 +325,10 @@ def build_artifacts(bib_rows, stats_rows, repos):
         key = repo["full_name"]
         if key not in artifacts:
             central_github_repo = parse_github_repo(repo["html_url"])
+            artifact_name = repo["full_name"].split("/", 1)[-1]
             artifacts[key] = {
-                "id": re.sub(r"[^a-z0-9]+", "-", repo["name"].lower()).strip("-"),
-                "name": repo["name"],
+                "id": re.sub(r"[^a-z0-9]+", "-", artifact_name.lower()).strip("-"),
+                "name": artifact_name,
                 "centralRepo": repo["full_name"],
                 "githubRepos": [central_github_repo or repo["full_name"]] if central_github_repo else [],
                 "centralUrl": repo["html_url"],
@@ -471,12 +430,6 @@ def build_artifacts(bib_rows, stats_rows, repos):
     for group_key, group_rows in groups.items():
         candidates = list(group_candidates.get(group_key, {}).values())
         if not candidates:
-            for row in group_rows:
-                if row["key"] in assigned:
-                    continue
-                if not is_external_artifact_candidate(row):
-                    continue
-                assigned[row["key"]] = add_row_to_artifact(row, external_artifact(row))
             continue
         for row in group_rows:
             if row["key"] in assigned:
