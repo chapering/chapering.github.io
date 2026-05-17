@@ -30,6 +30,28 @@ Optional:
 
 The first step prints progress for each unique artifact URL. A full run can take a few minutes because public GitHub, Bitbucket, and Zenodo calls are made serially and retry/timeout on slow network responses.
 
+## Add Repository URLs to BibTeX
+
+This separate tool updates a BibTeX file in place by matching each paper title to repositories under `https://github.com/baltsers`. It writes the central repository into `url_repository`; if more than one central repo matches, it writes the remaining links as `url_repo2`, `url_repo3`, and so on. Entries with no match are left unchanged.
+
+Dry run:
+
+```powershell
+./artifact-visibility-tools/update_bib_repositories.ps1 -BibPath pubs/hcaipub.bib -DryRun
+```
+
+Update the `.bib` file in place:
+
+```powershell
+./artifact-visibility-tools/update_bib_repositories.ps1 -BibPath pubs/hcaipub.bib
+```
+
+Refresh GitHub repository and README caches before matching:
+
+```powershell
+./artifact-visibility-tools/update_bib_repositories.ps1 -BibPath pubs/hcaipub.bib -RefreshRepos -RefreshReadmes
+```
+
 ## Notes
 
 - GitHub traffic views are not public through unauthenticated APIs, so GitHub-backed artifact views remain `N/A`.
