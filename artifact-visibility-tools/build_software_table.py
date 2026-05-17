@@ -57,6 +57,10 @@ KNOWN_GITHUB_STATS = {
     "awen-li/PolyFax": {"stars": 1, "watchers": 1, "forks": 0, "open_issues": 0, "open_prs": 0, "downloads": 0},
 }
 
+ALT_URL_FIELDS = ["url_figshare", "url_fighsare", "url_backup", "url_project", "url_docker"]
+REPO_ALT_FIELDS = [f"url_repo{i}" for i in range(2, 11)]
+BIB_URL_FIELDS = ["url_repository", *REPO_ALT_FIELDS, *ALT_URL_FIELDS]
+
 
 def clean_tex(value):
     if not value:
@@ -113,13 +117,12 @@ def parse_bib(path):
             "year",
             "booktitle",
             "journal",
-            "url_project",
-            "url_docker",
+            *BIB_URL_FIELDS,
             "doi",
             "note",
         ]:
             row[field] = clean_tex(extract_field(block, field))
-        if row.get("url_project"):
+        if any(row.get(field) for field in BIB_URL_FIELDS):
             rows.append(row)
     return rows
 
@@ -303,9 +306,9 @@ def add_source_metric(stats, field, value):
     stats[field] = max(int(stats.get(field, 0) or 0), value)
 
 
-def build_artifacts(bib_rows, stats_rows, repos):
-    stats_by_key = {r["key"]: r for r in stats_rows}
+def build_artifacts(bib_rows, stats_rows, repos, identity_field="url_repository"):
     repos_by_full_name = {r["full_name"]: r for r in repos}
+    repos_by_full_name_lower = {r["full_name"].lower(): r for r in repos}
     artifacts = {}
 
     def fallback_match(row):
@@ -347,6 +350,18 @@ def build_artifacts(bib_rows, stats_rows, repos):
             }
         return artifacts[key]
 
+    def add_url_to_artifact(art, url):
+        url = normalize_url(url)
+        if not url:
+            return
+        gh_url = parse_github_repo(url)
+        if gh_url:
+            url = f"https://github.com/{gh_url}"
+        if url and url.rstrip("/") != art["centralUrl"].rstrip("/"):
+            art["alternativeArtifacts"][url] = parse_platform(url)
+        if gh_url and gh_url not in art["githubRepos"]:
+            add_github_repo(art, gh_url, f"https://github.com/{gh_url}")
+
     def add_row_to_artifact(row, chosen_repo):
         art = ensure_artifact(chosen_repo)
         if chosen_repo["full_name"] != art["centralRepo"]:
@@ -356,29 +371,22 @@ def build_artifacts(bib_rows, stats_rows, repos):
                 chosen_repo["html_url"],
                 as_alternative=True,
             )
-        alt = normalize_url(row["url_project"])
-        gh_alt = parse_github_repo(alt)
-        if gh_alt:
-            alt = f"https://github.com/{gh_alt}"
-        if alt and alt != art["centralUrl"].rstrip("/"):
-            art["alternativeArtifacts"][alt] = parse_platform(alt)
-        if gh_alt and gh_alt not in art["githubRepos"]:
-            add_github_repo(art, gh_alt, f"https://github.com/{gh_alt}")
-        docker = normalize_url(row.get("url_docker"))
-        if docker and docker != art["centralUrl"].rstrip("/"):
-            art["alternativeArtifacts"][docker] = parse_platform(docker)
+        for field in [*REPO_ALT_FIELDS, *ALT_URL_FIELDS]:
+            add_url_to_artifact(art, row.get(field))
         for b in badges(row):
             if b not in art["badges"]:
                 art["badges"].append(b)
         info = paper_info(row)
         if info not in art["papers"]:
             art["papers"].append(info)
-        stat = stats_by_key.get(row["key"], {})
-        for field in ["views", "downloads", "stars", "forks"]:
-            value = stat.get(field)
-            if value not in (None, "N/A"):
-                art["cached"][field] = merge_metric(art["cached"][field], value)
         return art["centralRepo"]
+
+    def repo_from_repository_url(row):
+        repo_full_name = parse_github_repo(row.get("url_repository"))
+        if not repo_full_name:
+            return None
+        repo_full_name = CENTRAL_REPO_ALIASES.get(repo_full_name, repo_full_name)
+        return repos_by_full_name.get(repo_full_name) or repos_by_full_name_lower.get(repo_full_name.lower())
 
     def token_stems(text):
         stems = set()
@@ -411,31 +419,43 @@ def build_artifacts(bib_rows, stats_rows, repos):
 
         return sorted(candidates, key=score, reverse=True)[0]
 
-    groups = {}
-    for row in bib_rows:
-        groups.setdefault(artifact_key(row["url_project"]), []).append(row)
-
-    assigned = {}
-    group_candidates = {}
-    for group_key, group_rows in groups.items():
-        for row in group_rows:
-            repo = find_central_repo(row, repos) or fallback_match(row)
+    if identity_field == "url_repository":
+        groups = {}
+        for row in bib_rows:
+            repo = repo_from_repository_url(row)
             if not repo:
                 continue
-            central_repo = add_row_to_artifact(row, repo)
-            assigned[row["key"]] = central_repo
-            group_candidates.setdefault(group_key, {})
-            group_candidates[group_key][central_repo] = repos_by_full_name.get(central_repo, repo)
+            groups.setdefault(repo["full_name"], {"repo": repo, "rows": []})["rows"].append(row)
+        for group in groups.values():
+            for row in group["rows"]:
+                add_row_to_artifact(row, group["repo"])
+    else:
+        groups = {}
+        for row in bib_rows:
+            if row.get("url_project"):
+                groups.setdefault(artifact_key(row["url_project"]), []).append(row)
 
-    for group_key, group_rows in groups.items():
-        candidates = list(group_candidates.get(group_key, {}).values())
-        if not candidates:
-            continue
-        for row in group_rows:
-            if row["key"] in assigned:
+        assigned = {}
+        group_candidates = {}
+        for group_key, group_rows in groups.items():
+            for row in group_rows:
+                repo = find_central_repo(row, repos) or fallback_match(row)
+                if not repo:
+                    continue
+                central_repo = add_row_to_artifact(row, repo)
+                assigned[row["key"]] = central_repo
+                group_candidates.setdefault(group_key, {})
+                group_candidates[group_key][central_repo] = repos_by_full_name.get(central_repo, repo)
+
+        for group_key, group_rows in groups.items():
+            candidates = list(group_candidates.get(group_key, {}).values())
+            if not candidates:
                 continue
-            repo = candidates[0] if len(candidates) == 1 else best_repo_for_row(row, candidates)
-            assigned[row["key"]] = add_row_to_artifact(row, repo)
+            for row in group_rows:
+                if row["key"] in assigned:
+                    continue
+                repo = candidates[0] if len(candidates) == 1 else best_repo_for_row(row, candidates)
+                assigned[row["key"]] = add_row_to_artifact(row, repo)
 
     repo_stats = {}
     for repo in repos:
@@ -853,12 +873,18 @@ def main():
     parser.add_argument("--input", default="software.original.html")
     parser.add_argument("--output", default="software.html")
     parser.add_argument("--generated", default="software_artifacts.generated.json")
+    parser.add_argument(
+        "--identity-by",
+        choices=["url_repository", "url_project"],
+        default="url_repository",
+        help="BibTeX field used to identify unique artifacts; url_repository is the default.",
+    )
     args = parser.parse_args()
 
     bib = parse_bib(args.bib)
     stats = json.loads(Path(args.stats).read_text(encoding="utf-8"))["rows"]
     repos = load_baltsers(args.repos)
-    artifacts = build_artifacts(bib, stats, repos)
+    artifacts = build_artifacts(bib, stats, repos, args.identity_by)
     table = render_table(artifacts)
     original = Path(args.input).read_text(encoding="utf-8")
     updated = append_or_replace(original, table)

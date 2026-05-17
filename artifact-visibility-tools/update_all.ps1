@@ -5,6 +5,8 @@ param(
   [string]$RepoCachePath = "baltsers_repos.json",
   [string]$GeneratedDataPath = "software_artifacts.generated.json",
   [string]$CentralGitHubOwner = "baltsers",
+  [ValidateSet("url_repository", "url_project")]
+  [string]$IdentityBy = "url_repository",
   [string]$Python = "python"
 )
 
@@ -33,6 +35,7 @@ Write-Host "Appending/updating generated artifact table in $SoftwarePath..."
   --repos $RepoCachePath `
   --input $SoftwarePath `
   --output $SoftwarePath `
-  --generated $GeneratedDataPath
+  --generated $GeneratedDataPath `
+  --identity-by $IdentityBy
 
 Write-Host "Updated $SoftwarePath"

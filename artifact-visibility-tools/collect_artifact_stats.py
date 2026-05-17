@@ -12,6 +12,9 @@ BIB = sys.argv[1] if len(sys.argv) > 1 else "hcaipub.bib"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "artifact_stats.json"
 UA = "Mozilla/5.0 artifact-stats-script/1.0"
 LAST_HOST_CALL = defaultdict(float)
+ALT_URL_FIELDS = ["url_figshare", "url_fighsare", "url_backup", "url_project", "url_docker"]
+REPO_URL_FIELDS = ["url_repository", *[f"url_repo{i}" for i in range(2, 11)]]
+STAT_URL_FIELDS = [*REPO_URL_FIELDS, *ALT_URL_FIELDS]
 
 
 def log(message):
@@ -82,13 +85,29 @@ def parse_bib(path):
         block = text[starts[i] : starts[i + 1]]
         key = re.search(r"@\w+\s*\{\s*([^,]+),", block, re.S)
         row = {"key": key.group(1) if key else None}
-        for field in ["title", "year", "booktitle", "journal", "url_project", "doi"]:
+        for field in ["title", "year", "booktitle", "journal", *STAT_URL_FIELDS, "doi"]:
             row[field] = extract_field(block, field)
-        if row.get("url_project"):
+        if any(row.get(field) for field in STAT_URL_FIELDS):
             row["title"] = re.sub(r"\s+", " ", re.sub(r"[{}]", "", row.get("title") or "")).strip()
             row["venue"] = re.sub(r"\s+", " ", re.sub(r"[{}]", "", row.get("booktitle") or row.get("journal") or "")).strip()
             rows.append(row)
     return rows
+
+
+def artifact_urls(row):
+    out = []
+    seen = set()
+    for field in STAT_URL_FIELDS:
+        url = row.get(field)
+        if not url:
+            continue
+        url = url.strip()
+        key = url.rstrip("/")
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.append((field, url))
+    return out
 
 
 def classify(url):
@@ -239,21 +258,21 @@ def collect():
     unique_keys = []
     seen_keys = set()
     for p in papers:
-        kind, ident = classify(p["url_project"])
-        cache_key = (kind, ident)
-        if cache_key not in seen_keys:
-            seen_keys.add(cache_key)
-            unique_keys.append(cache_key)
+        for source_field, url in artifact_urls(p):
+            kind, ident = classify(url)
+            cache_key = (kind, ident)
+            if cache_key not in seen_keys:
+                seen_keys.add(cache_key)
+                unique_keys.append((cache_key, source_field, url))
 
     log(f"Found {len(papers)} papers with artifact links and {len(unique_keys)} unique artifact URLs.")
     completed = 0
-    for p in papers:
-        kind, ident = classify(p["url_project"])
-        cache_key = (kind, ident)
+    for cache_key, source_field, url in unique_keys:
+        kind, ident = cache_key
         if cache_key in cache:
             continue
         completed += 1
-        log(f"[{completed}/{len(unique_keys)}] {kind}: {ident}")
+        log(f"[{completed}/{len(unique_keys)}] {source_field} {kind}: {ident}")
         try:
             if kind == "github":
                 cache[cache_key] = github_stats(ident)
@@ -262,20 +281,27 @@ def collect():
             elif kind == "zenodo":
                 cache[cache_key] = zenodo_stats(ident)
             else:
-                cache[cache_key] = unavailable(kind, ident, p["url_project"])
+                cache[cache_key] = unavailable(kind, ident, url)
             log(f"  done")
         except Exception as e:
             errors[str(cache_key)] = repr(e)
-            cache[cache_key] = unavailable(kind, ident, p["url_project"])
+            cache[cache_key] = unavailable(kind, ident, url)
             cache[cache_key]["notes"] = "fetch error: " + repr(e)
             log(f"  failed: {repr(e)}")
 
     out = []
     for p in papers:
-        kind, ident = classify(p["url_project"])
-        s = dict(cache[(kind, ident)])
-        s.update({"year": p.get("year"), "paper": p.get("title"), "key": p.get("key"), "project_link": p["url_project"]})
-        out.append(s)
+        for source_field, url in artifact_urls(p):
+            kind, ident = classify(url)
+            s = dict(cache[(kind, ident)])
+            s.update({
+                "year": p.get("year"),
+                "paper": p.get("title"),
+                "key": p.get("key"),
+                "source_field": source_field,
+                "project_link": url,
+            })
+            out.append(s)
     return out, errors
 
 

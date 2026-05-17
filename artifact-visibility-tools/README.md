@@ -4,10 +4,12 @@ Regenerates the artifact table for `chapering.github.io/_pages/software.html` wi
 
 ## What It Does
 
-- Parses `pubs/hcaipub.bib` for papers with `url_project`.
+- Parses `pubs/hcaipub.bib` for papers with `url_repository` by default.
 - Fetches public repositories under `https://github.com/baltsers`.
-- Matches papers to central repos by exact repository description text such as `Artifact for: <paper title>`.
-- Uses the validated central GitHub repository as the artifact identity; shared Figshare/project links stay as alternative artifacts.
+- Uses the validated central GitHub repository from `url_repository` as the artifact identity.
+- Skips BibTeX entries without `url_repository`, and skips entries whose `url_repository` is not present under `https://github.com/baltsers`.
+- Lists other linked artifacts from `url_figshare`, `url_fighsare`, `url_backup`, `url_project`, `url_docker`, and `url_repo2`/`url_repo3`/... as alternative artifacts under the same central repository.
+- Totals statistics across the central repository plus all alternative artifacts.
 - Appends or replaces only the block between:
   - `<!-- BEGIN AUTO-GENERATED ARTIFACT TABLE -->`
   - `<!-- END AUTO-GENERATED ARTIFACT TABLE -->`
@@ -26,6 +28,12 @@ Optional:
 
 ```powershell
 ./artifact-visibility-tools/update_all.ps1 -Python "C:\path\to\python.exe"
+```
+
+To use the older `url_project` grouping behavior explicitly:
+
+```powershell
+./artifact-visibility-tools/update_all.ps1 -IdentityBy url_project
 ```
 
 The first step prints progress for each unique artifact URL. A full run can take a few minutes because public GitHub, Bitbucket, and Zenodo calls are made serially and retry/timeout on slow network responses.
