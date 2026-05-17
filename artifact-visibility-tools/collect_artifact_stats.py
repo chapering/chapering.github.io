@@ -14,6 +14,10 @@ UA = "Mozilla/5.0 artifact-stats-script/1.0"
 LAST_HOST_CALL = defaultdict(float)
 
 
+def log(message):
+    print(message, flush=True)
+
+
 def request_json(url, method="GET", body=None):
     host = urllib.parse.urlparse(url).netloc
     if host == "api.bitbucket.org":
@@ -232,11 +236,24 @@ def collect():
     papers = parse_bib(BIB)
     cache = {}
     errors = {}
+    unique_keys = []
+    seen_keys = set()
+    for p in papers:
+        kind, ident = classify(p["url_project"])
+        cache_key = (kind, ident)
+        if cache_key not in seen_keys:
+            seen_keys.add(cache_key)
+            unique_keys.append(cache_key)
+
+    log(f"Found {len(papers)} papers with artifact links and {len(unique_keys)} unique artifact URLs.")
+    completed = 0
     for p in papers:
         kind, ident = classify(p["url_project"])
         cache_key = (kind, ident)
         if cache_key in cache:
             continue
+        completed += 1
+        log(f"[{completed}/{len(unique_keys)}] {kind}: {ident}")
         try:
             if kind == "github":
                 cache[cache_key] = github_stats(ident)
@@ -246,10 +263,12 @@ def collect():
                 cache[cache_key] = zenodo_stats(ident)
             else:
                 cache[cache_key] = unavailable(kind, ident, p["url_project"])
+            log(f"  done")
         except Exception as e:
             errors[str(cache_key)] = repr(e)
             cache[cache_key] = unavailable(kind, ident, p["url_project"])
             cache[cache_key]["notes"] = "fetch error: " + repr(e)
+            log(f"  failed: {repr(e)}")
 
     out = []
     for p in papers:

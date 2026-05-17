@@ -285,23 +285,6 @@ def build_artifacts(bib_rows, stats_rows, repos):
     repos_by_full_name = {r["full_name"]: r for r in repos}
     artifacts = {}
 
-    groups = {}
-    for row in bib_rows:
-        groups.setdefault(artifact_key(row["url_project"]), []).append(row)
-
-    def choose_repo(matches):
-        # If multiple central repos mention papers that share the same artifact URL,
-        # prefer the latest paper's repo and avoid import-like names when possible.
-        def score(item):
-            repo, paper = item
-            try:
-                year = int(paper.get("year") or 0)
-            except ValueError:
-                year = 0
-            friendly = 0 if repo["name"].lower().startswith("wsucailab-") else 1
-            return (year, friendly, -len(repo["name"]))
-        return sorted(matches, key=score, reverse=True)[0][0]
-
     def fallback_match(row):
         return KNOWN_FALLBACK_GITHUB_ARTIFACTS.get(row["title"])
 
@@ -313,23 +296,7 @@ def build_artifacts(bib_rows, stats_rows, repos):
         if as_alternative and url.rstrip("/") != art["centralUrl"].rstrip("/"):
             art["alternativeArtifacts"][url] = "GitHub"
 
-    for group_key, group_rows in groups.items():
-        matches = []
-        seen = set()
-        for row in group_rows:
-            repo = find_central_repo(row, repos)
-            if repo and repo["full_name"] not in seen:
-                matches.append((repo, row))
-                seen.add(repo["full_name"])
-        if not matches:
-            for row in group_rows:
-                repo = fallback_match(row)
-                if repo:
-                    matches.append((repo, row))
-                    break
-        if not matches:
-            continue
-        chosen_repo = choose_repo(matches)
+    def ensure_artifact(chosen_repo):
         canonical_name = CENTRAL_REPO_ALIASES.get(chosen_repo["full_name"], chosen_repo["full_name"])
         repo = repos_by_full_name.get(canonical_name, chosen_repo)
         key = repo["full_name"]
@@ -353,35 +320,94 @@ def build_artifacts(bib_rows, stats_rows, repos):
                 "badges": [],
                 "papers": [],
             }
-        art = artifacts[key]
-        for matched_repo, _ in matches:
+        return artifacts[key]
+
+    def add_row_to_artifact(row, chosen_repo):
+        art = ensure_artifact(chosen_repo)
+        if chosen_repo["full_name"] != art["centralRepo"]:
             add_github_repo(
                 art,
-                matched_repo["full_name"],
-                matched_repo["html_url"],
-                as_alternative=matched_repo["full_name"] != art["centralRepo"],
+                chosen_repo["full_name"],
+                chosen_repo["html_url"],
+                as_alternative=True,
             )
+        alt = normalize_url(row["url_project"])
+        gh_alt = parse_github_repo(alt)
+        if gh_alt:
+            alt = f"https://github.com/{gh_alt}"
+        if alt and alt != art["centralUrl"].rstrip("/"):
+            art["alternativeArtifacts"][alt] = parse_platform(alt)
+        if gh_alt and gh_alt not in art["githubRepos"]:
+            add_github_repo(art, gh_alt, f"https://github.com/{gh_alt}")
+        for b in badges(row):
+            if b not in art["badges"]:
+                art["badges"].append(b)
+        info = paper_info(row)
+        if info not in art["papers"]:
+            art["papers"].append(info)
+        stat = stats_by_key.get(row["key"], {})
+        for field in ["views", "downloads", "stars", "forks"]:
+            value = stat.get(field)
+            if value not in (None, "N/A"):
+                art["cached"][field] = merge_metric(art["cached"][field], value)
+        return art["centralRepo"]
 
+    def token_stems(text):
+        stems = set()
+        for token in re.findall(r"[a-z0-9]+", clean_tex(text).lower()):
+            if len(token) < 4:
+                continue
+            for suffix in ["ing", "tion", "ions", "ed", "es", "s"]:
+                if token.endswith(suffix) and len(token) > len(suffix) + 3:
+                    token = token[: -len(suffix)]
+                    break
+            stems.add(token[:6])
+        return stems
+
+    def best_repo_for_row(row, candidates):
+        title = row.get("title", "")
+        title_stems = token_stems(title)
+
+        def score(repo):
+            desc = repo.get("description", "")
+            desc_l = desc.lower()
+            repo_l = repo.get("name", "").lower()
+            score_value = 0
+            if title and title.lower() in desc_l:
+                score_value += 100
+            if repo_l and repo_l in title.lower():
+                score_value += 25
+            score_value += len(title_stems & token_stems(desc)) * 3
+            score_value += len(title_stems & token_stems(repo_l))
+            return score_value
+
+        return sorted(candidates, key=score, reverse=True)[0]
+
+    groups = {}
+    for row in bib_rows:
+        groups.setdefault(artifact_key(row["url_project"]), []).append(row)
+
+    assigned = {}
+    group_candidates = {}
+    for group_key, group_rows in groups.items():
         for row in group_rows:
-            alt = normalize_url(row["url_project"])
-            gh_alt = parse_github_repo(alt)
-            if gh_alt:
-                alt = f"https://github.com/{gh_alt}"
-            if alt and alt != art["centralUrl"].rstrip("/"):
-                art["alternativeArtifacts"][alt] = parse_platform(alt)
-            if gh_alt and gh_alt not in art["githubRepos"]:
-                add_github_repo(art, gh_alt, f"https://github.com/{gh_alt}")
-            for b in badges(row):
-                if b not in art["badges"]:
-                    art["badges"].append(b)
-            info = paper_info(row)
-            if info not in art["papers"]:
-                art["papers"].append(info)
-            stat = stats_by_key.get(row["key"], {})
-            for field in ["views", "downloads", "stars", "forks"]:
-                value = stat.get(field)
-                if value not in (None, "N/A"):
-                    art["cached"][field] = merge_metric(art["cached"][field], value)
+            repo = find_central_repo(row, repos) or fallback_match(row)
+            if not repo:
+                continue
+            central_repo = add_row_to_artifact(row, repo)
+            assigned[row["key"]] = central_repo
+            group_candidates.setdefault(group_key, {})
+            group_candidates[group_key][central_repo] = repos_by_full_name.get(central_repo, repo)
+
+    for group_key, group_rows in groups.items():
+        candidates = list(group_candidates.get(group_key, {}).values())
+        if not candidates:
+            continue
+        for row in group_rows:
+            if row["key"] in assigned:
+                continue
+            repo = candidates[0] if len(candidates) == 1 else best_repo_for_row(row, candidates)
+            assigned[row["key"]] = add_row_to_artifact(row, repo)
 
     repo_stats = {}
     for repo in repos:
@@ -513,6 +539,20 @@ def build_artifacts(bib_rows, stats_rows, repos):
 def render_table(artifacts):
     data = json.dumps(artifacts).replace("</", "<\\/")
     rows = []
+    metric_keys = ["views", "downloads", "stars", "forks", "watchers", "open_issues", "open_prs"]
+
+    def total_metric(key):
+        total = 0
+        seen = False
+        for art in artifacts:
+            value = numeric_metric(art["cached"].get(key))
+            if value is None:
+                continue
+            total += value
+            seen = True
+        return total if seen else "N/A"
+
+    totals = {key: total_metric(key) for key in metric_keys}
     for art in artifacts:
         alt_links = []
         for url, label in sorted(art["alternativeArtifacts"].items(), key=lambda x: (x[1], x[0])):
@@ -545,6 +585,8 @@ def render_table(artifacts):
 .artifact-tools-table th {{ background: #f6f8fb; color: #253044; font-weight: 700; position: sticky; top: 0; z-index: 1; }}
 .artifact-tools-table tbody tr:nth-child(even) {{ background: #fbfcfe; }}
 .artifact-tools-table tbody tr:hover {{ background: #f2f7ff; }}
+.artifact-tools-table tfoot td {{ background: #eef4fb; border-top: 2px solid #cbd8ea; border-bottom: 0; color: #253044; font-weight: 700; }}
+.artifact-tools-table tfoot td:first-child {{ color: #173f6f; }}
 .artifact-tools-table td.metric, .artifact-tools-table th.metric {{ text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }}
 .artifact-tools-table .artifact-name {{ color: #1f5f9f; font-weight: 700; }}
 .artifact-tools-table .artifact-badge {{ display: inline-block; border: 1px solid #b6c6e6; border-radius: 999px; padding: 0.08rem 0.42rem; margin: 0.08rem; font-size: 0.75rem; background: #eef4ff; color: #28446c; }}
@@ -579,6 +621,21 @@ def render_table(artifacts):
   <tbody>
 {chr(10).join(rows)}
   </tbody>
+  <tfoot>
+    <tr class="artifact-total-row">
+      <td>All artifacts</td>
+      <td>Total</td>
+      <td>All alternative artifacts</td>
+      <td class="metric" data-total-stat="views">{html.escape(str(totals["views"]))}</td>
+      <td class="metric" data-total-stat="downloads">{html.escape(str(totals["downloads"]))}</td>
+      <td class="metric" data-total-stat="stars">{html.escape(str(totals["stars"]))}</td>
+      <td class="metric" data-total-stat="forks">{html.escape(str(totals["forks"]))}</td>
+      <td class="metric" data-total-stat="watchers">{html.escape(str(totals["watchers"]))}</td>
+      <td class="metric" data-total-stat="open_issues">{html.escape(str(totals["open_issues"]))}</td>
+      <td class="metric" data-total-stat="open_prs">{html.escape(str(totals["open_prs"]))}</td>
+      <td>All associated papers</td>
+    </tr>
+  </tfoot>
 </table>
 </div>
 </div>
@@ -654,6 +711,16 @@ def render_table(artifacts):
     sortRefreshTimer = window.setTimeout(() => sortTable(sortState.key, sortState.type, sortState.direction), 80);
   }}
 
+  function updateTotals() {{
+    ["views", "downloads", "stars", "forks", "watchers", "open_issues", "open_prs"].forEach(key => {{
+      const values = Array.from(document.querySelectorAll('#artifact-tools tbody [data-stat="' + key + '"]'))
+        .map(el => Number(el.textContent.trim().replace(/,/g, "")))
+        .filter(Number.isFinite);
+      const totalEl = document.querySelector('#artifact-tools [data-total-stat="' + key + '"]');
+      if (totalEl) totalEl.textContent = values.length ? String(values.reduce((a, b) => a + b, 0)) : "N/A";
+    }});
+  }}
+
   function setupSorting() {{
     document.querySelectorAll("#artifact-tools .artifact-sort-button").forEach(button => {{
       button.addEventListener("click", () => {{
@@ -700,13 +767,17 @@ def render_table(artifacts):
   }}
   function setCell(id, key, value) {{
     const el = document.querySelector('[data-artifact-id="' + id + '"] [data-stat="' + key + '"]');
-    if (el) el.textContent = fmt(value);
+    if (el) {{
+      el.textContent = fmt(value);
+      updateTotals();
+    }}
   }}
   function setCellIfKnown(id, key, value) {{
     if (isKnownNumber(value)) setCell(id, key, value);
   }}
   document.addEventListener("DOMContentLoaded", function () {{
     setupSorting();
+    updateTotals();
     (window.LAB_ARTIFACTS || []).forEach(async artifact => {{
       try {{
         const repos = artifact.githubRepos || [artifact.centralRepo];
