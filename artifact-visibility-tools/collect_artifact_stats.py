@@ -1,4 +1,6 @@
+import argparse
 import json
+import os
 import re
 import sys
 import time
@@ -8,13 +10,17 @@ import urllib.request
 from collections import defaultdict
 
 
-BIB = sys.argv[1] if len(sys.argv) > 1 else "hcaipub.bib"
-OUT = sys.argv[2] if len(sys.argv) > 2 else "artifact_stats.json"
+BIB = "hcaipub.bib"
+OUT = "artifact_stats.json"
 UA = "Mozilla/5.0 artifact-stats-script/1.0"
 LAST_HOST_CALL = defaultdict(float)
-ALT_URL_FIELDS = ["url_figshare", "url_fighsare", "url_backup", "url_project", "url_docker"]
+ALT_URL_FIELDS = ["url_figshare", "url_alternative", "url_backup", "url_project", "url_docker"]
 REPO_URL_FIELDS = ["url_repository", *[f"url_repo{i}" for i in range(2, 11)]]
 STAT_URL_FIELDS = [*REPO_URL_FIELDS, *ALT_URL_FIELDS]
+IDENTITY_BY = "url_repository"
+OWNER = "baltsers"
+REPO_CACHE = None
+GITHUB_MODE = "skip"
 
 
 def log(message):
@@ -29,6 +35,9 @@ def request_json(url, method="GET", body=None):
             time.sleep(1.2 - elapsed)
     data = None
     headers = {"User-Agent": UA, "Accept": "application/json"}
+    token = os.environ.get("GITHUB_TOKEN")
+    if token and host in {"api.github.com", "github.com"}:
+        headers["Authorization"] = f"Bearer {token}"
     if body is not None:
         data = json.dumps(body).encode("utf-8")
         headers["Content-Type"] = "application/json"
@@ -108,6 +117,41 @@ def artifact_urls(row):
         seen.add(key)
         out.append((field, url))
     return out
+
+
+def load_valid_repos(path):
+    if not path:
+        return None
+    try:
+        repos = json.load(open(path, encoding="utf-8"))
+    except FileNotFoundError:
+        return None
+    return {r.get("full_name", "").lower() for r in repos if r.get("full_name")}
+
+
+def parse_github_repo(url):
+    if not url:
+        return None
+    u = urllib.parse.urlparse(url.strip().removesuffix(".git").rstrip("/"))
+    if u.netloc.lower() != "github.com":
+        return None
+    parts = u.path.strip("/").split("/")
+    if len(parts) < 2:
+        return None
+    return f"{parts[0]}/{parts[1].removesuffix('.git')}"
+
+
+def row_matches_identity(row, valid_repos):
+    if IDENTITY_BY == "url_project":
+        return bool(row.get("url_project"))
+    repo = parse_github_repo(row.get("url_repository"))
+    if not repo:
+        return False
+    if repo.split("/", 1)[0].lower() != OWNER.lower():
+        return False
+    if valid_repos is not None and repo.lower() not in valid_repos:
+        return False
+    return True
 
 
 def classify(url):
@@ -251,8 +295,25 @@ def unavailable(kind, ident, url):
     }
 
 
+def github_skipped(repo):
+    return {
+        "platform": "GitHub",
+        "artifact": f"https://github.com/{repo}",
+        "views": "N/A",
+        "downloads": "N/A",
+        "stars": "N/A",
+        "watchers": "N/A",
+        "forks": "N/A",
+        "open_issues": "N/A",
+        "open_prs": "N/A",
+        "notes": "GitHub API stats skipped to avoid rate limits; central repository stats come from the fetched repo cache.",
+    }
+
+
 def collect():
-    papers = parse_bib(BIB)
+    valid_repos = load_valid_repos(REPO_CACHE)
+    all_papers = parse_bib(BIB)
+    papers = [p for p in all_papers if row_matches_identity(p, valid_repos)]
     cache = {}
     errors = {}
     unique_keys = []
@@ -265,7 +326,15 @@ def collect():
                 seen_keys.add(cache_key)
                 unique_keys.append((cache_key, source_field, url))
 
-    log(f"Found {len(papers)} papers with artifact links and {len(unique_keys)} unique artifact URLs.")
+    skipped_papers = len(all_papers) - len(papers)
+    skipped_github = sum(1 for cache_key, _, _ in unique_keys if cache_key[0] == "github" and GITHUB_MODE == "skip")
+    fetched_keys = len(unique_keys) - skipped_github
+    log(
+        f"Found {len(papers)} papers matching {IDENTITY_BY}"
+        f" ({skipped_papers} skipped) and {len(unique_keys)} unique artifact URLs."
+    )
+    if skipped_github:
+        log(f"Skipping {skipped_github} GitHub URL(s) during stat collection to avoid API rate limits; fetching {fetched_keys} non-GitHub URL(s).")
     completed = 0
     for cache_key, source_field, url in unique_keys:
         kind, ident = cache_key
@@ -273,6 +342,10 @@ def collect():
             continue
         completed += 1
         log(f"[{completed}/{len(unique_keys)}] {source_field} {kind}: {ident}")
+        if kind == "github" and GITHUB_MODE == "skip":
+            cache[cache_key] = github_skipped(ident)
+            log("  skipped")
+            continue
         try:
             if kind == "github":
                 cache[cache_key] = github_stats(ident)
@@ -306,6 +379,25 @@ def collect():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("bib", nargs="?", default=BIB)
+    parser.add_argument("out", nargs="?", default=OUT)
+    parser.add_argument("--identity-by", choices=["url_repository", "url_project"], default=IDENTITY_BY)
+    parser.add_argument("--owner", default=OWNER)
+    parser.add_argument("--repo-cache", default=None)
+    parser.add_argument(
+        "--github-mode",
+        choices=["skip", "public-api"],
+        default=GITHUB_MODE,
+        help="Skip GitHub API calls by default to avoid unauthenticated rate limits.",
+    )
+    args = parser.parse_args()
+    BIB = args.bib
+    OUT = args.out
+    IDENTITY_BY = args.identity_by
+    OWNER = args.owner
+    REPO_CACHE = args.repo_cache
+    GITHUB_MODE = args.github_mode
     rows, errors = collect()
     open(OUT, "w", encoding="utf-8").write(json.dumps({"rows": rows, "errors": errors}, indent=2))
     print(json.dumps({"count": len(rows), "errors": errors}, indent=2))

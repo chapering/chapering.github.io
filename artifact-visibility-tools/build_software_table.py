@@ -57,7 +57,7 @@ KNOWN_GITHUB_STATS = {
     "awen-li/PolyFax": {"stars": 1, "watchers": 1, "forks": 0, "open_issues": 0, "open_prs": 0, "downloads": 0},
 }
 
-ALT_URL_FIELDS = ["url_figshare", "url_fighsare", "url_backup", "url_project", "url_docker"]
+ALT_URL_FIELDS = ["url_figshare", "url_alternative", "url_backup", "url_project", "url_docker"]
 REPO_ALT_FIELDS = [f"url_repo{i}" for i in range(2, 11)]
 BIB_URL_FIELDS = ["url_repository", *REPO_ALT_FIELDS, *ALT_URL_FIELDS]
 

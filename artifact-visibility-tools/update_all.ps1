@@ -7,26 +7,36 @@ param(
   [string]$CentralGitHubOwner = "baltsers",
   [ValidateSet("url_repository", "url_project")]
   [string]$IdentityBy = "url_repository",
+  [ValidateSet("skip", "public-api")]
+  [string]$GitHubMode = "skip",
   [string]$Python = "python"
 )
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "Collecting publication artifact stats..."
-& $Python "artifact-visibility-tools/collect_artifact_stats.py" $BibPath $StatsPath
-
 Write-Host "Fetching central GitHub repositories for $CentralGitHubOwner..."
+$headers = @{ "Accept" = "application/vnd.github+json"; "User-Agent" = "artifact-visibility-tools" }
+if ($env:GITHUB_TOKEN) {
+  $headers["Authorization"] = "Bearer $env:GITHUB_TOKEN"
+}
 $repos = @()
 $page = 1
 do {
   $url = "https://api.github.com/users/$CentralGitHubOwner/repos?per_page=100&page=$page"
-  $batch = Invoke-RestMethod -Uri $url -Headers @{ "Accept" = "application/vnd.github+json"; "User-Agent" = "artifact-visibility-tools" }
+  $batch = Invoke-RestMethod -Uri $url -Headers $headers
   if ($batch.Count -gt 0) {
     $repos += $batch
     $page += 1
   }
 } while ($batch.Count -eq 100)
 $repos | ConvertTo-Json -Depth 8 | Set-Content -Path $RepoCachePath -Encoding UTF8
+
+Write-Host "Collecting publication artifact stats..."
+& $Python "artifact-visibility-tools/collect_artifact_stats.py" $BibPath $StatsPath `
+  --identity-by $IdentityBy `
+  --owner $CentralGitHubOwner `
+  --repo-cache $RepoCachePath `
+  --github-mode $GitHubMode
 
 Write-Host "Appending/updating generated artifact table in $SoftwarePath..."
 & $Python "artifact-visibility-tools/build_software_table.py" `
